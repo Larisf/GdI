@@ -163,7 +163,6 @@ int main(void)
 				printf("\nBitte geben Sie einen gueltigen Betrag ein!\n\n");
 		}
 		//Bei einer Eingabe, die zu einem Rueckgabewert != 2 fuehrt, wird dieser Teil ausgefuehrt.
-		//Test
 		else
 			printf("\nBitte gueltige Auswahl treffen!\n\n");
 	}
