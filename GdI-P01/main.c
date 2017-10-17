@@ -146,7 +146,7 @@ int main(void)
 				default:
 				{
 					//Handling bei Eingabe einer Zahl > 5
-					printf("\nBitte gueltige Auswahl treffen!\n\n");
+					printf("\nBitte gueltige Auswahl treffen!22\n\n");
 					break;
 				}
 			}
@@ -164,6 +164,6 @@ int main(void)
 		}
 		//Bei einer Eingabe, die zu einem Rueckgabewert != 2 fuehrt, wird dieser Teil ausgefuehrt.
 		else
-			printf("\nBitte gueltige Auswahl treffen!\n\n");
+			printf("\nBitte gueltige Auswahl treffen!1\n\n");
 	}
 }
