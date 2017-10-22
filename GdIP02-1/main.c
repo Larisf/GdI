@@ -12,7 +12,7 @@ int main(void)
 	{
 		printf("Bitte geben Sie eine Zahl ein.\n");
 		gets(&input);
-		if(strchr(&input, '.') == NULL && strchr(&input, ',') == NULL)
+		if(strchr(&input, '.') == NULL && strchr(&input, ',') == NULL && strchr(&input, '-') == NULL)
 		{
 			zahl = atol(&input);
 			merker = zahl;
@@ -31,6 +31,6 @@ int main(void)
 			return EXIT_SUCCESS;
 		}
 		else
-			printf("Bitte eine ganze Zahl eingeben!\n");
+			printf("Bitte eine ganze positive Zahl eingeben!\n");
 	}
 }
