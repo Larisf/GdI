@@ -25,14 +25,12 @@ int main(void)
 				{
 					count++; //counter bei jedem durchlauf der Do-While Schleife um 1 erhöhen.
 					if(rechnung%2 == 0) //prüfen ob modulo 2 = 0
-					{
 						rechnung /= 2;
-					}
 					else if(rechnung%2 != 0 && rechnung != 1) //falls modulo 2 != 0 hier ausführen
 						rechnung = 3*rechnung+1;
 				}
 				while(rechnung != 1); //prüfen ob die zahl != 1 ist
-			printf("%d\t    || %llu\n",count,merker=i); //ausgabe der zahlen und anzahl der durchläufe pro zahl
+				printf("%d\t    || %llu\n",count,merker=i); //ausgabe der zahlen und anzahl der durchläufe pro zahl
 			}
 			return EXIT_SUCCESS;
 		}
