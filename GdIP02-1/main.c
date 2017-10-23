@@ -5,8 +5,8 @@
 int main(void)
 {
 	setbuf(stdout, NULL);
-	unsigned long long int zahl,merker;
-	int count = 0;
+	unsigned long long int zahl,merker,rechnung,i;
+	int count;
 	char input;
 	while(1)
 	{
@@ -15,19 +15,25 @@ int main(void)
 		if(strchr(&input, '.') == NULL && strchr(&input, ',') == NULL && strchr(&input, '-') == NULL)
 		{
 			zahl = atol(&input);
-			merker = zahl;
-			do
+			printf("Anfangswert || Durchlaeufe\n");
+			for(i = 1; i <= zahl; i++)
 			{
-				count++;
-				if(zahl%2 == 0)
+				merker = i;
+				rechnung = i;
+				count = 0;
+				do
 				{
-					zahl /= 2;
+					count++;
+					if(rechnung%2 == 0)
+					{
+						rechnung /= 2;
+					}
+					else if(rechnung%2 != 0 && rechnung != 1)
+						rechnung = 3*rechnung+1;
 				}
-				else if(zahl%2 != 0 && zahl != 1)
-					zahl = 3*zahl+1;
+				while(rechnung != 1);
+			printf("%llu\t    || %d\n",merker,count);
 			}
-			while(zahl != 1);
-			printf("Der Anfangswert fuer n war: %llu\nDer Algorithmus wurde %d mal durchlaufen\n",merker,count);
 			return EXIT_SUCCESS;
 		}
 		else
