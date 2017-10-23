@@ -15,7 +15,7 @@ int main(void)
 		if(strchr(&input, '.') == NULL && strchr(&input, ',') == NULL && strchr(&input, '-') == NULL) //gespeicherte eingabe auf zeichen prüfen
 		{
 			zahl = atol(&input); //char array zu long konvertieren
-			printf("Anfangswert || Durchlaeufe\n");
+			printf("Durchlaeufe || Anfangswert\n");
 			for(i = 1; i <= zahl; i++) //for schleife zum durchlaufen des Algorithmus
 			{
 				merker = i; //wird = i gesetzt um die aktuelle zahl nutzen zu können.
@@ -32,7 +32,7 @@ int main(void)
 						rechnung = 3*rechnung+1;
 				}
 				while(rechnung != 1); //prüfen ob die zahl != 1 ist
-			printf("%llu\t    || %d\n",merker=i,count); //ausgabe der zahlen und anzahl der durchläufe pro zahl
+			printf("%d\t    || %llu\n",count,merker=i); //ausgabe der zahlen und anzahl der durchläufe pro zahl
 			}
 			return EXIT_SUCCESS;
 		}
