@@ -5,7 +5,7 @@
 int main(void)
 {
 	setbuf(stdout, NULL);
-	unsigned long long int maximum,number,calcNumber,i; //unsigned = nur positive werte, long long int = großer werte bereich = des double
+	unsigned long long int maximum,calcNumber,i; //unsigned = nur positive werte, long long int = großer werte bereich = des double
 	int count; //zähler variable
 	char input; //input string
 	while(calcNumber != 1) //endlosschleife
@@ -29,7 +29,7 @@ int main(void)
 						calcNumber = 3*calcNumber+1;
 				}
 				while(calcNumber != 1); //prüfen ob die zahl != 1 ist
-				printf("%d\t    || %llu\n",count,number=i); //ausgabe der zahlen und anzahl der durchläufe pro zahl
+				printf("%d\t    || %llu\n",count,i); //ausgabe der zahlen und anzahl der durchläufe pro zahl
 			}
 		}
 		else
