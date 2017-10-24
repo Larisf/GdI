@@ -5,7 +5,8 @@
 int main(void)
 {
 	setbuf(stdout, NULL);
-	unsigned long long int maximum,calcNumber,i; //unsigned = nur positive werte, long long int = großer werte bereich = des double
+	unsigned long long int maximum,i; //unsigned = nur positive werte, long long int = großer werte bereich = des double
+	unsigned long long int calcNumber = 0; //Zuweisung erfolgt bereits, um dem Zufall der "1" als Zuweisungswert aus dem Weg zu gehen.
 	int count; //zähler variable
 	char input; //input string
 	while(calcNumber != 1) //endlosschleife
