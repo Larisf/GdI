@@ -5,17 +5,16 @@
 int main(void)
 {
 	setbuf(stdout, NULL);
-	unsigned long long int maximum,i; //unsigned = nur positive werte, long long int = großer werte bereich = des double
-	unsigned long long int calcNumber = 0; //Zuweisung erfolgt bereits, um dem Zufall der "1" als Zuweisungswert aus dem Weg zu gehen.
+	long long int maximum,i, calcNumber = 0; //unsigned = nur positive werte, long long int = großer werte bereich = des double
+							 //Zuweisung erfolgt bereits, um dem Zufall der "1" als Zuweisungswert aus dem Weg zu gehen.
 	int count; //zähler variable
 	char input; //input string
 	while(calcNumber != 1) //endlosschleife
 	{
 		printf("Bitte geben Sie eine Zahl ein.\n");
 		gets(&input); //Eingabe einfagen und in input speichern
-		if(strchr(&input, '.') == NULL && strchr(&input, ',') == NULL && strchr(&input, '-') == NULL) //gespeicherte eingabe auf zeichen prüfen
-		{
-			maximum = atol(&input); //char array zu long konvertieren
+		if(strchr(&input, '.') == NULL && strchr(&input, ',') == NULL && (maximum = atol(&input)) > 0) //gespeicherte eingabe auf zeichen prüfen 
+		{																 //char array zu long konvertieren
 			printf("Durchlaeufe || Anfangswert\n");
 			for(i = 1; i <= maximum; i++) //for schleife zum durchlaufen des Algorithmus
 			{
