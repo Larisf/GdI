@@ -1,23 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-int main(void)
+int maximum, i, count, calcNumber = 0;
+int hcp(int x)
 {
-	setbuf(stdout, NULL);
-	long long int maximum,i, calcNumber = 0; //unsigned = nur positive werte, long long int = großer werte bereich = des double
-							 //Zuweisung erfolgt bereits, um dem Zufall der "1" als Zuweisungswert aus dem Weg zu gehen.
-	int count; //zähler variable
-	char input; //input string
-	while(calcNumber != 1) //endlosschleife
-	{
-		printf("Bitte geben Sie eine Zahl ein.\n");
-		gets(&input); //Eingabe einfagen und in input speichern
-		if(strchr(&input, '.') == NULL && strchr(&input, ',') == NULL && (maximum = atol(&input)) > 0) //gespeicherte eingabe auf zeichen prüfen 
-		{																 //char array zu long konvertieren
-			printf("Durchlaeufe || Anfangswert\n");
-			for(i = 1; i <= maximum; i++) //for schleife zum durchlaufen des Algorithmus
-			{
 				calcNumber = i; // wird mit
 				count = 0; //counter auf 0 setzen
 				do
@@ -29,7 +15,23 @@ int main(void)
 						calcNumber = 3*calcNumber+1;
 				}
 				while(calcNumber != 1); //prüfen ob die zahl != 1 ist
-				printf("%d\t    || %llu\n",count,i); //ausgabe der zahlen und anzahl der durchläufe pro zahl
+				return count;
+}
+int main(void)
+{
+	char input; //input string
+	setbuf(stdout, NULL);
+	while(calcNumber != 1) //endlosschleife
+	{
+		printf("Bitte geben Sie eine Zahl ein.\n");
+		gets(&input); //Eingabe einfagen und in input speichern
+		if(strchr(&input, '.') == NULL && strchr(&input, ',') == NULL && (maximum = atoi(&input)) > 0) //gespeicherte eingabe auf zeichen prüfen 
+		{																 //char array zu long konvertieren
+			printf("Durchlaeufe || Anfangswert\n");
+			for(i = 1; i <= maximum; i++) //for schleife zum durchlaufen des Algorithmus
+			{
+				hcp(input);
+				printf("%d\t    || %d\n",hcp(count),i); //ausgabe der zahlen und anzahl der durchläufe pro zahl
 			}
 		}
 		else
