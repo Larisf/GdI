@@ -7,7 +7,6 @@ int substrings(char* str, char* substr, char** ptr, int n)
 	for(int i= 0; i < n; i++){
 		if(*ptr)
 		{
-		 printf ("%s " , *ptr);
 		 *ptr = strstr(*ptr+1,substr);
 		 k++;
 		}
