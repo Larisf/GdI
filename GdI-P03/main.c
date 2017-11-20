@@ -1,5 +1,5 @@
 #include "substring.h"
-main() 
+main()
 {
 	char* str = "Rokokokomode";
 	char* substr = "oko";
