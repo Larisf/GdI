@@ -26,9 +26,7 @@ int substrings(char* str, char* substr, char** ptr, int n)
 				temp = 0;
 		}
 		if(temp == strlen(substr))
-		{
-			 k++;
-		}
+			k++;
 	}
 return k;
 }
