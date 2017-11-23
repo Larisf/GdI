@@ -15,10 +15,10 @@ return k;
 }*/
 int substrings(char* str, char* substr, char** ptr, int n)
 {
-	int temp,k = 0;
+	int temp,j,k = 0;
 	for(int i= 0; i < strlen(str); i++)
 	{
-		for(int j = 0; j < strlen(substr); j++)
+		for(j = 0; j < strlen(substr); j++)
 		{
 			if(str[i+j] == substr[j])
 				temp++;
@@ -26,7 +26,10 @@ int substrings(char* str, char* substr, char** ptr, int n)
 				temp = 0;
 		}
 		if(temp == strlen(substr))
+		{
+			ptr[k] = &str[i];	
 			k++;
+		}
 	}
 return k;
 }
