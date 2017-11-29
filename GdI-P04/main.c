@@ -55,6 +55,8 @@ int main() //Menue und Switch-Case
 				printf("Ende"); //Ausgabe bei beenden des Programmes
 				return (EXIT_SUCCESS); //Abbruch Bedingung
 			}
+			default:
+				printf("Ungueltige Eingabe!\n"); //Ausgabe bei falscher Eingabe bzw. eines Wertes >= 4
 		}
 	}
 }
