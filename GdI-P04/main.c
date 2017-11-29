@@ -119,8 +119,8 @@ void printQeue() //Ausgabe der Liste
 	{
 		while(liste != NULL)
 		{
-				printf("%d\n",liste->key);
-				liste = liste->next;
+			printf("%d\n",liste->key);
+			liste = liste->next;
 		}
 	}
 	else
