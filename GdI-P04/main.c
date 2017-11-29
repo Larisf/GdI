@@ -1,24 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * File:   main.c
- * Author: Bambi
- *
- * Created on 27. November 2017, 19:30
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 struct Knoten //Struktur für die Liste
 {
-	int key;
-	struct Knoten* next;
+	int key; //Variable für die Speicherung der Elemente
+	struct Knoten* next; //zeiger auf die nächste Struktur vom selben Typen und den selben Mitgliedern/Variablen
 }*anfang, *liste; //Strukturen namen
 /*Strukturen anlegen*/
 	struct Knoten *anfang; //Struktur-Name *anfang
@@ -34,7 +20,6 @@ void printQeue(void);
 int main() //Menue und Switch-Case
 {
 	int eingabe = 0,auswahl = 0; //Deklaration der Variablen
-
 	qinit(); //Warteschlange mit NULL initialisieren
 	while(1) //endlosschleife
 	{
