@@ -1,3 +1,4 @@
+/*Code by Lars Isferding FH-Muenster*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
