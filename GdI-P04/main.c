@@ -143,79 +143,79 @@ void printQeue() //Ausgabe der Liste
 	else
 		return printf("Leer: %d\n",isempty()); //ausgabe, wenn die liste leer ist
 }
-void sortQeueAbsteigend()
+void sortQeueAbsteigend() //absteigend sortiern
 {
-	int vorgaenger=0;
-	liste = anfang;
-	if(liste != NULL)
+	int vorgaenger=0; //Temporäre Variable zum speichern
+	liste = anfang; //liste auf den Anfang setzen
+	if(liste != NULL) //liste nicht leer
 	{
-		for(int i= 0;i <= anzElemente;i++)
+		for(int i= 0;i <= anzElemente;i++) //solange ausführen, wie es Elemente in der Liste gibt
 		{	
 			liste = anfang;
-			while(liste->next != NULL)
+			while(liste->next != NULL) //solange noch ein Nachfolger existiert
 			{
-				if(liste->key < liste->next->key)
+				if(liste->key < liste->next->key) //abfrage ob derzeitiger wert kleiner als nachfolger
 				{
-					vorgaenger = liste->key;
-					liste->key = liste->next->key;
-					liste->next->key = vorgaenger;				
+					vorgaenger = liste->key; //derzeitiger wert in variable
+					liste->key = liste->next->key; //nachfolger auf derzeitige stelle
+					liste->next->key = vorgaenger;			//temporärer variable an nachfolgende stelle speichern
 				}
-				liste = liste->next;
+				liste = liste->next; //weiter iterieren
 			}
 		}
 	}
 }
-void sortQeueAufsteigend()
+void sortQeueAufsteigend() //aufsteigend sortieren
 {
-	int vorgaenger=0;
-	liste = anfang;
-	if(liste != NULL)
+	int vorgaenger=0; //Temporäre Variable zum speichern
+	liste = anfang; //liste auf den Anfang setzen
+	if(liste != NULL) //liste nicht leer
 	{
-		for(int i= 0;i <= anzElemente;i++)
+		for(int i= 0;i <= anzElemente;i++) //solange ausführen, wie es Elemente in der Liste gibt
 		{	
 			liste = anfang;
-			while(liste->next != NULL)
+			while(liste->next != NULL) //solange noch ein Nachfolger existiert
 			{
-				if(liste->key > liste->next->key)
+				if(liste->key > liste->next->key) //abfrage ob derzeitiger wert kleiner als nachfolger
 				{
-					vorgaenger = liste->key;
-					liste->key = liste->next->key;
-					liste->next->key = vorgaenger;				
+					vorgaenger = liste->key; //derzeitiger wert in variable
+					liste->key = liste->next->key; //nachfolger auf derzeitige stelle
+					liste->next->key = vorgaenger;			//temporärer variable an nachfolgende stelle speichern
 				}
-				liste = liste->next;
+				liste = liste->next; //weiter iterieren
 			}
 		}
 	}
 }
 
-int chosenDeqeue()
+int chosenDeqeue() //beliebigen wert loeschen
 {
-	struct Knoten* temp;
-	int eingabe=0;
+	struct Knoten* temp; //temporären Knoten erstellen
+	int eingabe=0; //variable für den beliebigen wert
 	liste = anfang; //liste auf anfang setzen
 	if(liste != NULL) //erste Element aus der Warteschlange löschen
 	{
-		printf("zu loeschenden Wert eingeben: \n");
+		printf("zu loeschenden Wert eingeben: \n"); //aufforderung für die eingabe
 		scanf("%d",&eingabe);
-		if(anfang->key == eingabe)
+		if(anfang->key == eingabe) //abfrage ob der anfang = der eingabe
 			{
-				liste = liste->next;
-				free(anfang);
-				anfang = liste;
+				liste = liste->next; //liste auf nachfolger setzen
+				free(anfang); //anfang loeschen
+				anfang = liste; //neuen anfang setzen
 			}
 		else
 		{
-			liste = anfang;
-			while(liste->next != NULL)
+			liste = anfang; //liste auf anfang setzen
+			while(liste->next != NULL) //solange noch nachfolger existieren
 			{
-				temp = liste->next;
-				if(liste->next->key == eingabe)
+				temp = liste->next; //nachfolger in temp speichern
+				if(liste->next->key == eingabe) //wenn nachfolger = eingabe
 				{
-					liste->next = temp->next;
-					free(temp);
+					liste->next = temp->next; //nachfolger auf den übernächsten nachfolger setzen
+					free(temp); //alten nachfolger freigeben
 					break;
 				}
-				liste = temp;
+				liste = temp; //liste auf temp setzen, damit sie nicht abreißt.
 			}	
 		}
 	}
