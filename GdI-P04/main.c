@@ -158,7 +158,7 @@ void sortQeueAbsteigend() //absteigend sortiern
 				{
 					vorgaenger = liste->key; //derzeitiger wert in variable
 					liste->key = liste->next->key; //nachfolger auf derzeitige stelle
-					liste->next->key = vorgaenger;			//temporärer variable an nachfolgende stelle speichern
+					liste->next->key = vorgaenger;//temporärer variable an nachfolgende stelle speichern
 				}
 				liste = liste->next; //weiter iterieren
 			}
@@ -180,7 +180,7 @@ void sortQeueAufsteigend() //aufsteigend sortieren
 				{
 					vorgaenger = liste->key; //derzeitiger wert in variable
 					liste->key = liste->next->key; //nachfolger auf derzeitige stelle
-					liste->next->key = vorgaenger;			//temporärer variable an nachfolgende stelle speichern
+					liste->next->key = vorgaenger;//temporärer variable an nachfolgende stelle speichern
 				}
 				liste = liste->next; //weiter iterieren
 			}
