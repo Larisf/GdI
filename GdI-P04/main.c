@@ -33,7 +33,8 @@ int main() //Menue und Switch-Case
 				"4. Beenden des Programms\n"
 				/*"5. Sortieren -> Absteigend\n"
 				"6. Sortieren -> Aufsteigend\n"
-				"7. Beliebige Zahl loeschen\n\n"*/
+				"7. Beliebige Zahl loeschen\n"
+				 8. Anzahl der Elemente ausgeben\n\n*/
 				"Bitte geben Sie die Ziffer der gewuenschten Funktion ein:");
 		scanf("%d",&auswahl); //einlesen des Switch-Case Parameters
 		switch(auswahl) //Switch-Case
@@ -77,6 +78,11 @@ int main() //Menue und Switch-Case
 				chosenDeqeue();
 				break;
 			}
+			case 8:
+			{
+				sizeQeue();
+				break;
+			}
 			default:
 				printf("Ungueltige Eingabe!\n"); //Ausgabe bei falscher Eingabe bzw. eines Wertes >= 4
 		}
@@ -112,15 +118,14 @@ void enqeue(int element) //element anhaengen
 int deqeue() //element loeschen
 {
 	liste = anfang; //liste auf anfang setzen
-	if(liste != NULL) //erste Element aus der Warteschlange löschen
+	if(isempty()) //erste Element aus der Warteschlange löschen
 	{
+		return printf("Leer: %d\n",isempty());
+	}
 		printf("Geloescht: %d\n",liste->key); //Ausgabe des zu löschenden Elementes
 		liste = anfang->next; //liste auf den nachfolger von anfang setzen
 		free(anfang); //speicherplatz für anfang freigeben
 		anfang = liste; //liste auf anfang setzen
-	}
-	else //Rückgabe, wenn die Warteschlange leer ist
-		return printf("Leer: %d\n",isempty()); 
 }
 int isempty() //Funktion zur Überprüfung ob die Warteschlange leer ist
 {
@@ -132,16 +137,15 @@ int isempty() //Funktion zur Überprüfung ob die Warteschlange leer ist
 void printQeue() //Ausgabe der Liste
 {
 	liste = anfang; //liste auf anfang setzen
-	if(liste != NULL) //wenn die liste nicht leer ist
+	if(isempty())
 	{
-		while(liste != NULL) //solange die liste nicht leer ist
-		{
-			printf("%d\n",liste->key); // werte ausgeben an der jeweiligen position
-			liste = liste->next; //liste auf den nachfolger setzen
-		}
-	}
-	else
 		return printf("Leer: %d\n",isempty()); //ausgabe, wenn die liste leer ist
+	}
+	while(liste != NULL) //solange die liste nicht leer ist
+	{
+		printf("%d\n",liste->key); // werte ausgeben an der jeweiligen position
+		liste = liste->next; //liste auf den nachfolger setzen
+	}
 }
 void sortQeueAbsteigend() //absteigend sortiern
 {
@@ -219,4 +223,21 @@ int chosenDeqeue() //beliebigen wert loeschen
 			}	
 		}
 	}
+}
+
+int sizeQeue()
+{
+	int anzElemente = 1;
+	liste = anfang;
+	if(anfang != NULL)
+	{
+		while(liste->next != NULL)
+		{
+			anzElemente++;
+			liste = liste->next;
+		}
+	}
+	else
+		printf("LEER\n");
+	return anzElemente;
 }
