@@ -13,28 +13,31 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-/*
- * 
- */
-char ersetze(char zeichen);
 const int MAX=255;
+void kopiere(FILE *datei);
 int main(int argc, char** argv) 
 {
-	char zeichen, satz[MAX];
+	char satz[MAX];
 	FILE *datei;
 	setbuf(stdout, NULL);
-	if(argc < 2)
+	if(argc > 2)
 	{
 		printf("Keine Datei gefunden, bitte taetigen Sie eine Eingabe:\n");
 		fgets(satz,MAX,stdin);
 		printf("%s",satz);
 	}
-	else
+	else if((datei = fopen("test.txt","r")) != NULL)
 	{
-		datei = fopen("test.txt","r");
-		while((zeichen = fgetc(datei))!= EOF)
-			putchar(zeichen);
+		//fgets(satz,MAX,datei);
+		kopiere(datei);
+		fclose(datei);
+		//printf("%s",satz);
 	}
 	return (EXIT_SUCCESS);
+}
+void kopiere(FILE *datei)
+{
+	int zeichen;
+	while((zeichen = getc(datei)) != EOF)
+		putchar(zeichen);
 }
