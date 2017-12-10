@@ -17,8 +17,24 @@
 /*
  * 
  */
-int main(int argc, char** argv) {
-
+char ersetze(char zeichen);
+const int MAX=255;
+int main(int argc, char** argv) 
+{
+	char zeichen, satz[MAX];
+	FILE *datei;
+	setbuf(stdout, NULL);
+	if(argc < 2)
+	{
+		printf("Keine Datei gefunden, bitte taetigen Sie eine Eingabe:\n");
+		fgets(satz,MAX,stdin);
+		printf("%s",satz);
+	}
+	else
+	{
+		datei = fopen("test.txt","r");
+		while((zeichen = fgetc(datei))!= EOF)
+			putchar(zeichen);
+	}
 	return (EXIT_SUCCESS);
 }
-
