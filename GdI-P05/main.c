@@ -15,37 +15,25 @@
 #include <stdlib.h>
 const int MAX=255;
 void kopiere(FILE *datei);
+void tabulator(char satz[]);
 int main(int argc, char** argv) 
 {
-	char satz[MAX],satzteil[MAX];
+	char satz[MAX];
 	FILE *datei;
 	setbuf(stdout, NULL);
-	if(argc > 2)
+	if(argc < 2)
 	{
 		printf("Keine Datei gefunden, bitte taetigen Sie eine Eingabe:\n");
 		fgets(satz,MAX,stdin);
-		printf("%s",satz);
+		tabulator(satz);
+		//printf("%s",satz);
 	}
 	else if((datei = fopen("test.txt","r")) != NULL)
 	{
 		fgets(satz,MAX,datei);
 		//kopiere(datei);
+		tabulator(satz);
 		fclose(datei);
-		for(int i=0,j = 0; i <MAX;i++,j++)
-		{
-			satzteil[i] = satz[j];
-			if(satz[j] == '\\' && satz[j+1] == 't')
-			{	
-				j+=2;
-				for(int z= 0; z<8;z++)
-				{
-					satzteil[i] = ' ';
-					i++;
-				}
-			}
-			satzteil[i] = satz[j];			
-		}
-		printf("%s",satzteil);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -54,4 +42,24 @@ void kopiere(FILE *datei)
 	char zeichen;
 	while((zeichen = getc(datei)) != EOF)
 		putchar(zeichen);
+}
+void tabulator(char satz[])
+{
+	char satzteil[MAX];
+
+	for(int i=0,j = 0; i <MAX;i++,j++)
+	{
+		satzteil[i] = satz[j];
+		if(satz[j] == '\\' && satz[j+1] == 't')
+		{	
+			j+=2;
+			for(int z= 0; z<8;z++)
+			{
+				satzteil[i] = ' ';
+				i++;
+			}
+		}
+		satzteil[i] = satz[j];	
+	}
+	printf("%s",satzteil);
 }
