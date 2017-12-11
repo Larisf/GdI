@@ -17,7 +17,7 @@ const int MAX=255;
 void kopiere(FILE *datei);
 int main(int argc, char** argv) 
 {
-	char satz[MAX];
+	char satz[MAX],satzteil[MAX];
 	FILE *datei;
 	setbuf(stdout, NULL);
 	if(argc > 2)
@@ -28,16 +28,30 @@ int main(int argc, char** argv)
 	}
 	else if((datei = fopen("test.txt","r")) != NULL)
 	{
-		//fgets(satz,MAX,datei);
-		kopiere(datei);
+		fgets(satz,MAX,datei);
+		//kopiere(datei);
 		fclose(datei);
-		//printf("%s",satz);
+		for(int i=0,j = 0; i <MAX;i++,j++)
+		{
+			satzteil[i] = satz[j];
+			if(satz[j] == '\\' && satz[j+1] == 't')
+			{	
+				j+=2;
+				for(int z= 0; z<8;z++)
+				{
+					satzteil[i] = ' ';
+					i++;
+				}
+			}
+			satzteil[i] = satz[j];			
+		}
+		printf("%s",satzteil);
 	}
 	return (EXIT_SUCCESS);
 }
 void kopiere(FILE *datei)
 {
-	int zeichen;
+	char zeichen;
 	while((zeichen = getc(datei)) != EOF)
 		putchar(zeichen);
 }
