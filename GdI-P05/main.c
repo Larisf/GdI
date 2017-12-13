@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 const int MAX=32767; //Maximale länge des strings
-void expand(FILE *datei);
+void expand(FILE *datei); //Funktion bekannt machen
 int main(int argc, char** argv) 
 {
 	setbuf(stdout, NULL); //Output_Buffer auf NULL setzen
