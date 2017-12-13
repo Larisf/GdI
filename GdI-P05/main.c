@@ -30,16 +30,28 @@ int main(int argc, char** argv)
 }
 void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 {
-	int c=0; 
-	while((c=fgetc(datei)) != EOF) //solange bis das datei ende erreicht wurde
+	int z;
+	char satz[MAX],satzteil[MAX]; 
+	while(fgets(satz,MAX,datei)) //Solange ausführen bis das Dateiende erreicht ist
 	{
-		if(c=='\\') //ist c = '\'
-			if((c=fgetc(datei))=='t') //ist der darauf folgende character = t
-				for(int i=0; i<7;i++) //solange ausführen bis i = 6 (7x dank der 0)
+		for(int j=0,i=0; i<MAX;i++,j++) //for-schleife zum iterieren
+		{
+			satzteil[i] = satz[j]; //string auf string setzen
+			if(satz[j] == '\\' && satz[j+1] == 't') //ist die position mit einem \ erreicht, nächste stelle prüfen ob die = t ist
+			{
+				z = j; //z = j setzen
+				j+=2; //j inkrementieren um hinter das \t zu kommen
+				if((z%8)==0) //ist z%8=0, 8 leerzeichen einfuegen
+					for(int k=0; k<8;k++) //
+						satzteil[i++] = ' '; //
+				while((z%8) != 0) //ist z != 8, solange ausfuerhen bis z%8 = 0 ist
 				{
-					c = ' '; //c = leerzeichen setzen
-					putchar(c); //leezeichen in console schreiben
+					satzteil[i++] = ' ';
+					z++;
 				}
-		putchar(c); //character der datei in console schreiben
+			}
+			satzteil[i] = satz[j]; //stringsaneinanderhängen
+		}
+	  fputs(satzteil,stdout); //zeile ausgeben und von vorne anfangen.
 	}
 }
