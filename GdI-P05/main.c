@@ -17,7 +17,7 @@ const int MAX=32767; //Maximale länge des strings
 void expand(FILE *datei); //Funktion bekannt machen
 int main(int argc, char** argv) 
 {
-	setbuf(stdout, NULL); //Output_Buffer auf NULL setzen
+	setbuf(stdout, NULL); //Output_Buffer auf NULL setzen !!!NUR IN IDES NÖTIG, WELCHE DIE STANDARTAUSGABE PUFFERN!!!
 	FILE *datei; //File typ mit einem Zeiger für die Datei
 	if(argc < 2 || (datei = fopen(argv[1],"r")) == NULL) //wenn input der Argumente beim programmstart < 2 dann:
 	{
@@ -30,8 +30,8 @@ int main(int argc, char** argv)
 }
 void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 {
-	int z;
-	char satz[MAX],satzteil[MAX]; 
+	int z; //laeufer variable
+	char satz[MAX],satzteil[MAX]; //arrays zum kopieren und bearbeiten der strings aus der Datei/Eingabe 
 	while(fgets(satz,MAX,datei)) //Solange ausführen bis das Dateiende erreicht ist
 	{
 		for(int j=0,i=0; i<MAX;i++,j++) //for-schleife zum iterieren
@@ -46,8 +46,8 @@ void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 						satzteil[i++] = ' '; //
 				while((z%8) != 0) //ist z != 8, solange ausfuerhen bis z%8 = 0 ist
 				{
-					satzteil[i++] = ' ';
-					z++;
+					satzteil[i++] = ' '; //leerzeichen an stell i setzen und inkrementieren
+					z++; //z inkrementieren
 				}
 			}
 			satzteil[i] = satz[j]; //stringsaneinanderhängen
