@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-const int MAX=32767; //Maximale länge des strings
+static const int MAX=32767; //Maximale länge des strings static = wird nur einmal angelegt speicher für belegt. const = Konstante - nicht veränderbar
 void expand(FILE *datei); //Funktion bekannt machen
 int main(int argc, char** argv) 
 {
