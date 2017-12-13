@@ -34,7 +34,8 @@ void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 	char satz[MAX],satzteil[MAX]; //arrays zum kopieren und bearbeiten der strings aus der Datei/Eingabe 
 	while(fgets(satz,MAX,datei)) //Solange ausführen bis das Dateiende erreicht ist
 	{
-		for(int j=0,i=0; i<MAX;i++,j++) //for-schleife zum iterieren
+		realloc(satz,sizeof(datei)); //Speicherplatz anpassen an die eingabe
+		for(int j=0,i=0; i<(sizeof(satz)/sizeof(char));i++,j++) //for-schleife zum iterieren
 		{
 			satzteil[i] = satz[j]; //string auf string setzen
 			if(satz[j] == '\\' && satz[j+1] == 't') //ist die position mit einem \ erreicht, nächste stelle prüfen ob die = t ist
@@ -43,7 +44,7 @@ void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 				j+=2; //j inkrementieren um hinter das \t zu kommen
 				if((z%8)==0) //ist z%8=0, 8 leerzeichen einfuegen
 					for(int k=0; k<8;k++) //
-						satzteil[i++] = ' '; //
+						satzteil[i++] = ' '; // leerzeichen setzen und inkrementieren
 				while((z%8) != 0) //ist z != 8, solange ausfuerhen bis z%8 = 0 ist
 				{
 					satzteil[i++] = ' '; //leerzeichen an stell i setzen und inkrementieren
@@ -52,6 +53,9 @@ void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 			}
 			satzteil[i] = satz[j]; //stringsaneinanderhängen
 		}
-	  fputs(satzteil,stdout); //zeile ausgeben und von vorne anfangen.
+		realloc(satzteil,sizeof(datei)); //speicherplatz an die neue groesse anpassen
+		fputs(satzteil,stdout); //zeile ausgeben und von vorne anfangen.
 	}
+	free(satz); //speicherplatz freigeben
+	free(satzteil); //speicherplatz freigeben
 }
