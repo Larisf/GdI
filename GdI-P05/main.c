@@ -34,7 +34,6 @@ void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 	char satz[MAX],satzteil[MAX]; //arrays zum kopieren und bearbeiten der strings aus der Datei/Eingabe 
 	while(fgets(satz,MAX,datei)) //Solange ausführen bis das Dateiende erreicht ist
 	{
-		realloc(satz,sizeof(datei)); //Speicherplatz anpassen an die eingabe
 		for(int j=0,i=0; i<(sizeof(satz)/sizeof(char));i++,j++) //for-schleife zum iterieren
 		{
 			satzteil[i] = satz[j]; //string auf string setzen
@@ -53,9 +52,6 @@ void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 			}
 			satzteil[i] = satz[j]; //stringsaneinanderhängen
 		}
-		realloc(satzteil,sizeof(datei)); //speicherplatz an die neue groesse anpassen
 		fputs(satzteil,stdout); //zeile ausgeben und von vorne anfangen.
 	}
-	free(satz); //speicherplatz freigeben
-	free(satzteil); //speicherplatz freigeben
 }
