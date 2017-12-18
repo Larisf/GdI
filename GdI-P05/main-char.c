@@ -14,26 +14,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 void expand(FILE *datei); //Funktion bekannt machen
-int main(int argc, char** argv) 
+int main_a(int argc, char** argv) 
 {
 	setbuf(stdout, NULL); //Output_Buffer auf NULL setzen !!!NUR IN IDES NÖTIG, WELCHE DIE STANDARTAUSGABE PUFFERN!!!
 	FILE *datei; //File typ mit einem Zeiger für die Datei
 	if(argc < 2 || (datei = fopen(argv[1],"r")) == NULL) //wenn input der Argumente beim programmstart < 2 dann:
 	{
 		printf("Keine Datei gefunden! Bitte eingabe taetigen:\n"); //Ausgabe, wenn keine Datei angegeben oder gefunden wurde
-		expand(stdin); //rufe expand auf
+		expand_a(stdin); //rufe expand auf
 	}
 	else if((datei = fopen(argv[1],"r")) != NULL) //argc > 2 dann öffne die datei mit dem Namen "NAME" zum lesen, wenn vorhanden
-		expand(datei); //rufe expand auf
+		expand_a(datei); //rufe expand auf
 	return (EXIT_SUCCESS);
 }
-void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
+void expand_a(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 {
-	int counter=0,c,control=0; //laeufer variable
+	int counter=0,c,cTemp,control=0; //laeufer variable
 	while((c = fgetc(datei)) != EOF) //Solange ausführen bis das Dateiende erreicht ist
 	{
 		if(c == '\\')
-			if(c=fgetc(datei) == 't')//ist die position mit einem \ erreicht, nächste stelle prüfen ob die = t ist
+		{
+			cTemp = c; //temporaere variable anlegen.
+			if((c=fgetc(datei)) == 't')//ist die position mit einem \ erreicht, nächste stelle prüfen ob die = t ist
 			{
 				{
 					if((counter%8)==0) //ist z%8=0, 8 leerzeichen einfuegen
@@ -52,7 +54,9 @@ void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 					}
 				}
 			}
-
+			else if(c != 't') //wenn c != 't' der vorgaenger aber ein \ war.
+				fputc(cTemp,stdout); //ausgabe des temporaer gespeicherten wertes.
+		}
 		if(control == 0) //kontrolle ob vorher leerzeichen waren
 		{
 			fputc(c,stdout); //zeile ausgeben und von vorne anfangen.
