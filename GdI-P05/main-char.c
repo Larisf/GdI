@@ -21,13 +21,13 @@ int main_a(int argc, char** argv)
 	if(argc < 2 || (datei = fopen(argv[1],"r")) == NULL) //wenn input der Argumente beim programmstart < 2 dann:
 	{
 		printf("Keine Datei gefunden! Bitte eingabe taetigen:\n"); //Ausgabe, wenn keine Datei angegeben oder gefunden wurde
-		expand_a(stdin); //rufe expand auf
+		expand(stdin); //rufe expand auf
 	}
 	else if((datei = fopen(argv[1],"r")) != NULL) //argc > 2 dann öffne die datei mit dem Namen "NAME" zum lesen, wenn vorhanden
-		expand_a(datei); //rufe expand auf
+		expand(datei); //rufe expand auf
 	return (EXIT_SUCCESS);
 }
-void expand_a(FILE *datei) //expand funktion convertiere \t zu leerzeichen
+void expand(FILE *datei) //expand funktion convertiere \t zu leerzeichen
 {
 	int counter=0,c,cTemp,control=0; //laeufer variable
 	while((c = fgetc(datei)) != EOF) //Solange ausführen bis das Dateiende erreicht ist
