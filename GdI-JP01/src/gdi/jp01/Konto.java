@@ -17,7 +17,7 @@ public class Konto {
      */
     private int kontostand;
     private int kontoNr;
-    Inhaber inhaber;
+    private Inhaber inhaber;
     Konto(int kontoNr, String vorname, String nachname, String adresse) //Konto eröffnen
     {
         this.kontoNr = kontoNr;
