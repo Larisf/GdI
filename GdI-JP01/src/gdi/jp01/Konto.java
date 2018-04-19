@@ -100,7 +100,8 @@ public class Konto {
     public void ueberweisen(int betrag, Konto empfaenger) //Geld von A nach B ueberweisen
     {
         abheben(betrag);
-        empfaenger.einzahlen(betrag);
+		if(kontostand >= (betrag+dispo))
+			empfaenger.einzahlen(betrag);
     }
     
     /**
