@@ -82,7 +82,7 @@ public class Konto
         anzKonten++;
         this.kontostand = einzahlung;
         inhaber = new Inhaber(vorname,nachname,adresse);
-	this.zinssatz = zinssatz;
+		this.zinssatz = zinssatz;
     }   
 	
 	/**
@@ -106,15 +106,6 @@ public class Konto
 		k.ueberweisen(12,k1,2018,3,30);
 		k.ueberweisen(14,k1,2018,3,24);
 		k.getKontoauszug(0, 0, 0);	
-    }
-   
-	/**
-     * Funktion zum ausgeben des Kontostands
-     * @return int kontostand Gibt den Kontostand aus
-     */
-    public double getKontostand() //Kontostand rausgeben
-    {
-        return kontostand;
     }
     
 	/**
@@ -177,6 +168,15 @@ public class Konto
 		}
     }
    
+	/**
+     * Funktion zum ausgeben des Kontostands
+     * @return int kontostand Gibt den Kontostand aus
+     */
+    public double getKontostand() //Kontostand rausgeben
+    {
+        return kontostand;
+    }
+	
 	/**
      * Funktion zum ausgeben der Kontonummer
      * @return int kontoNr Gibt die Kontonummer aus
@@ -268,12 +268,13 @@ public class Konto
 			   getInhaber().getAdresse(),
 			   getKontoNr(),
 			   getKontostand());
+	   System.out.printf("ART\t\tMENGE\tDATUM\n");
 	   if(jahr == 0 || monat == 0 || tag == 0)
 	   {
 			for(Calendar cal: listA)
 				if((calA.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
 				{
-					System.out.printf("%S von: %d Euro am: %d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
+					System.out.printf("%S\t%d\t%d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					i++;				
 				}
 	   }
@@ -283,7 +284,7 @@ public class Konto
 			for(Calendar cal: listA)
 				if((cal.getTimeInMillis())  >= calB.getTimeInMillis())
 				{
-					System.out.printf("%S von: %d Euro am: %d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
+					System.out.printf("%S\t%d\t%d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					i++;
 				}
 		}
