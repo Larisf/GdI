@@ -1,10 +1,7 @@
-
- package jp02;
-
+package jp02;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
 
 /**
  * Klasse zum erstellen eines Kontos.
@@ -12,7 +9,8 @@ import java.util.GregorianCalendar;
  * @author Lars Isferding
  * @version 13.4.2018
  */
-public class Konto {
+public class Konto 
+{
     private static int anzKonten = 100000000;
     private double kontostand;
     private int kontoNr;
@@ -25,7 +23,8 @@ public class Konto {
 	private final ArrayList<Calendar> listA = new ArrayList<>(); //Kalender-Liste für Einzahlungen
 	private final ArrayList listA1 = new ArrayList(); //Liste Für Einzahlungen
 	private final ArrayList listA2 = new ArrayList(); //Liste Für Einzahlungen
-    /**
+    
+	/**
      * Konstruktor zum eröffnen eines neuen Kontos
      * @param vorname Vornamen angeben 
      * @param nachname Nachnamen angeben 
@@ -37,7 +36,8 @@ public class Konto {
         anzKonten++;
         inhaber = new Inhaber(vorname,nachname,adresse);
 	}
-    /**
+    
+	/**
      * Konstruktor zum eröffnen eines neuen Kontos
      * @param vorname Vornamen angeben 
      * @param nachname Nachnamen angeben 
@@ -51,7 +51,8 @@ public class Konto {
         this.kontostand = einzahlung;
         inhaber = new Inhaber(vorname,nachname,adresse);
     }   
-    /**
+    
+	/**
      * Konstruktor zum eröffnen eines neuen Kontos
      * @param vorname Vornamen angeben 
      * @param nachname Nachnamen angeben 
@@ -65,6 +66,7 @@ public class Konto {
         empfaenger.einzahlen(60,jahr,monat,tag);
         inhaber = new Inhaber(vorname,nachname,adresse);
     }
+	
 	/**
      * Konstruktor zum eröffnen eines neuen Kontos
      * @param vorname Vornamen angeben 
@@ -82,6 +84,7 @@ public class Konto {
         inhaber = new Inhaber(vorname,nachname,adresse);
 	this.zinssatz = zinssatz;
     }   
+	
 	/**
 	 * Zu Testzwecken in Netbeans - Compilerus muchos besserus.
 	 * @param args[] uebergebene Argumente abfragen
@@ -104,7 +107,8 @@ public class Konto {
 		k.ueberweisen(14,k1,2018,3,24);
 		k.getKontoauszug(0, 0, 0);	
     }
-    /**
+   
+	/**
      * Funktion zum ausgeben des Kontostands
      * @return int kontostand Gibt den Kontostand aus
      */
@@ -112,7 +116,8 @@ public class Konto {
     {
         return kontostand;
     }
-    /**
+    
+	/**
      * Funktion zum einzahlen eines Betrages.
      * @param kontostand Kontostand um gewissen Betrag erhöhen
 	 * @param jahr Jahreszahl der Einzahlung
@@ -127,7 +132,8 @@ public class Konto {
 		listA1.add(einz);
 		listA2.add("Einzahlung");
     }
-    /**
+   
+	/**
      * Funktion zum abheben eines Betrages unter Berücksichtigung des Dispos.
      * 
      * @param abheben Betrag, welcher abgehoben werden soll.
@@ -150,7 +156,8 @@ public class Konto {
 		else if(kontoTyp == 1)
 			System.out.println("Kein negatives Guthaben erlaubt bei Sparkonten!");
     }
-    /**
+    
+	/**
      * Funktion zum überweisen von A nach B
      * @param betrag Betrag welcher überwiesen werden soll
      * @param empfaenger Empfaenger Konto auswählen
@@ -169,7 +176,8 @@ public class Konto {
 			listA2.add("Überweisung");
 		}
     }
-    /**
+   
+	/**
      * Funktion zum ausgeben der Kontonummer
      * @return int kontoNr Gibt die Kontonummer aus
      */
@@ -177,15 +185,17 @@ public class Konto {
     {
         return kontoNr;
     }
-    /**
+    
+	/**
      * Funktion zum setzen einer Kontonummer.
      * @param kontoNr übergebene Kontonummer.
-    */
+     */
     public void setKontoNr(int kontoNr) //KontoNr Setzen
     {
         this.kontoNr = kontoNr;
     }
-    /**
+   
+	/**
      * Funktion zum ausgeben des Inhabers.
      * @return inhaber Inhaber ausgeben
      */
@@ -193,7 +203,8 @@ public class Konto {
     {
 		return inhaber;
     }   
-    /**
+    
+	/**
      *  Funktion zum Inanspruch nehmen eines Dispos
      *  @param dispo setzen einer Dispogrenze
      */
@@ -204,7 +215,8 @@ public class Konto {
 		else
 			System.out.println("Kein Dispo bei Sparkonten erlaubt!");
     }
-    /**
+    
+	/**
      * Funktion zum ausgeben des Dispos
      * @return int dispo ausgeben der Dispogrenze
      */
@@ -212,23 +224,18 @@ public class Konto {
    {
         return dispo;    
    }
-   /**
-	* Erstellt einen Kontoauszug
-	* @param jahr Jahreszahl übergeben
-	* @param monat Monat übergeben
-	* @param tag  Tag übergeben
-	*/
    
    /**
 	* Funktion zur Zinszahlung bei Sparkonten
 	* @return Rückgabe des neuen Kontostandes
 	*/
-   public double Zinszahlung()
+   public double zinszahlung()
    {
 	   this.kontostand = this.kontostand + (this.kontostand * (zinssatz/10000));
 	   return kontostand;
    }
-   	/**
+	
+   /**
 	* Funktion zum setzen des Zinssatzes
 	* @param zinssatz  zinssatz übergeben
 	*/
@@ -236,6 +243,7 @@ public class Konto {
    {
 	   this.zinssatz = zinssatz;
    }
+   
    /**
 	* Funktion zur Rückgabe des Zinssatzes
 	* @return 
@@ -245,10 +253,16 @@ public class Konto {
 	   return zinssatz/10000;
    }
 
+   /**
+	* Erstellt einen Kontoauszug
+	* @param jahr Jahreszahl übergeben
+	* @param monat Monat übergeben
+	* @param tag  Tag übergeben
+	*/
    public void getKontoauszug(int jahr, int monat, int tag)
    {
 	   int i=0;
-	   System.out.printf("Vorname: %S |Nachname: %S |Adresse: %S |Kontonummer: %d |Guthaben: %.2f Euro\n", 
+	   System.out.printf("Vorname: %S |Nachname: %S |Adresse: %S |Kontonummer: %d |Guthaben: %d Euro\n", 
 			   getInhaber().getVorname(),
 			   getInhaber().getNachname(),
 			   getInhaber().getAdresse(),
@@ -257,26 +271,21 @@ public class Konto {
 	   if(jahr == 0 || monat == 0 || tag == 0)
 	   {
 			for(Calendar cal: listA)
-			{
 				if((calA.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
 				{
 					System.out.printf("%S von: %d Euro am: %d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					i++;				
 				}
-			}
 	   }
 	   else
 	   {
-		   Calendar calB = new GregorianCalendar(jahr,monat,tag);
+		    Calendar calB = new GregorianCalendar(jahr,monat,tag);
 			for(Calendar cal: listA)
-			{
 				if((cal.getTimeInMillis())  >= calB.getTimeInMillis())
 				{
 					System.out.printf("%S von: %d Euro am: %d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					i++;
 				}
-			}
-
 		}
 	}
 }
