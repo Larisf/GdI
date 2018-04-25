@@ -3,6 +3,7 @@ package jp02;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 
@@ -19,7 +20,7 @@ public class Konto {
     private final Inhaber inhaber;
     private double dispo;
 	private int abzug,einz,ueber;
-	private Calendar calA,calB,calC = new GregorianCalendar();	
+	private Calendar calA,calB,calC;
 	private Calendar calD = Calendar.getInstance();
 	private final ArrayList<Calendar> listA = new ArrayList<>(); //Kalender-Liste für Einzahlungen
 	private final ArrayList listA1 = new ArrayList(); //Liste Für Einzahlungen
@@ -215,6 +216,7 @@ public class Konto {
 			   getKontostand());
 	   if(jahr == 0 || monat == 0 || tag == 0)
 	   {
+			//Collections.sort(listA);
 			for(Calendar cal: listA)
 			{
 				if((calD.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
@@ -253,7 +255,7 @@ public class Konto {
 			}
 			for(Calendar cal: listB)
 			{
-				if((calD.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
+				if((cal.getTimeInMillis())  >= calD.getTimeInMillis())
 				{
 					System.err.printf("Abbuchung von: %d Euro am: %d.%d.%d\n", listB1.get(j),cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
 					j++;
@@ -261,7 +263,7 @@ public class Konto {
 			}
 			for(Calendar cal: listC)
 			{
-				if((calD.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
+				if((cal.getTimeInMillis())  >= calD.getTimeInMillis())
 				{
 					System.err.printf("Übertrag von: %d Euro am: %d.%d.%d\n", listC1.get(k),cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
 					k++;
