@@ -1,5 +1,5 @@
 
-package jp02;
+ package jp02;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,10 +14,12 @@ import java.util.GregorianCalendar;
  */
 public class Konto {
     private static int anzKonten = 100000000;
-    private int kontostand;
+    private double kontostand;
     private int kontoNr;
+	private int kontoTyp = 0;
     private final Inhaber inhaber;
-    private double dispo;
+	private double zinssatz;
+    private int dispo;
 	private int abzug,einz,ueber;
 	private Calendar calA;
 	private final ArrayList<Calendar> listA = new ArrayList<>(); //Kalender-Liste für Einzahlungen
@@ -64,6 +66,23 @@ public class Konto {
         inhaber = new Inhaber(vorname,nachname,adresse);
     }
 	/**
+     * Konstruktor zum eröffnen eines neuen Kontos
+     * @param vorname Vornamen angeben 
+     * @param nachname Nachnamen angeben 
+     * @param adresse Adresse angeben
+     * @param einzahlung betrag zum einzahlen angeben
+	 * @param zinssatz Zinssatz setzen
+     */
+    Konto(String vorname, String nachname, String adresse, int einzahlung,double zinssatz, int jahr, int monat, int tag) //Konto eröffnen mit Einzahlung
+    {
+		kontoTyp = 1;
+        kontoNr = kontoNr+anzKonten;
+        anzKonten++;
+        this.kontostand = einzahlung;
+        inhaber = new Inhaber(vorname,nachname,adresse);
+	this.zinssatz = zinssatz;
+    }   
+	/**
 	 * Zu Testzwecken in Netbeans - Compilerus muchos besserus.
 	 * @param args[] uebergebene Argumente abfragen
 	 */
@@ -89,7 +108,7 @@ public class Konto {
      * Funktion zum ausgeben des Kontostands
      * @return int kontostand Gibt den Kontostand aus
      */
-    public int getKontostand() //Kontostand rausgeben
+    public double getKontostand() //Kontostand rausgeben
     {
         return kontostand;
     }
@@ -126,8 +145,10 @@ public class Konto {
 			listA1.add(abzug);
 			listA2.add("Abbuchung");
 		}
-        else
+		else if(kontoTyp == 0)
             System.out.println("Dispo nicht ausreichend");
+		else if(kontoTyp == 1)
+			System.out.println("Kein negatives Guthaben erlaubt bei Sparkonten!");
     }
     /**
      * Funktion zum überweisen von A nach B
@@ -178,13 +199,16 @@ public class Konto {
      */
     public void setDispo(int dispo)
     {
-        this.dispo = dispo;
+		if(kontoTyp == 0)
+			this.dispo = dispo;
+		else
+			System.out.println("Kein Dispo bei Sparkonten erlaubt!");
     }
     /**
      * Funktion zum ausgeben des Dispos
      * @return int dispo ausgeben der Dispogrenze
      */
-   public double getDispo()
+   public int getDispo()
    {
         return dispo;    
    }
@@ -194,6 +218,33 @@ public class Konto {
 	* @param monat Monat übergeben
 	* @param tag  Tag übergeben
 	*/
+   
+   /**
+	* Funktion zur Zinszahlung bei Sparkonten
+	* @return Rückgabe des neuen Kontostandes
+	*/
+   public double Zinszahlung()
+   {
+	   this.kontostand = this.kontostand + (this.kontostand * (zinssatz/10000));
+	   return kontostand;
+   }
+   	/**
+	* Funktion zum setzen des Zinssatzes
+	* @param zinssatz  zinssatz übergeben
+	*/
+   public void setZinssatz(double zinssatz)
+   {
+	   this.zinssatz = zinssatz;
+   }
+   /**
+	* Funktion zur Rückgabe des Zinssatzes
+	* @return 
+	*/
+   public double getZinssatz()
+   {
+	   return zinssatz/10000;
+   }
+
    public void getKontoauszug(int jahr, int monat, int tag)
    {
 	   int i=0;
