@@ -248,7 +248,7 @@ public class Konto {
    public void getKontoauszug(int jahr, int monat, int tag)
    {
 	   int i=0;
-	   System.out.printf("Vorname: %S |Nachname: %S |Adresse: %S |Kontonummer: %d |Guthaben: %d Euro\n", 
+	   System.out.printf("Vorname: %S |Nachname: %S |Adresse: %S |Kontonummer: %d |Guthaben: %.2f Euro\n", 
 			   getInhaber().getVorname(),
 			   getInhaber().getNachname(),
 			   getInhaber().getAdresse(),
