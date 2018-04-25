@@ -20,14 +20,16 @@ public class Konto {
     private final Inhaber inhaber;
     private double dispo;
 	private int abzug,einz,ueber;
-	private Calendar calA,calB,calC;
-	private Calendar calD = Calendar.getInstance();
+	private Calendar calA;
 	private final ArrayList<Calendar> listA = new ArrayList<>(); //Kalender-Liste für Einzahlungen
 	private final ArrayList listA1 = new ArrayList(); //Liste Für Einzahlungen
-	private final ArrayList<Calendar> listB = new ArrayList<>(); //Kalender-Liste für Abbuchungen 
+	private final ArrayList listA2 = new ArrayList(); //Liste Für Einzahlungen
+/*	private final ArrayList<Calendar> listB = new ArrayList<>(); //Kalender-Liste für Abbuchungen 
 	private final ArrayList listB1 = new ArrayList(); //Liste Für Abbuchungen
+	private final ArrayList listB2 = new ArrayList(); //Liste Für Abbuchungen
 	private final ArrayList<Calendar> listC = new ArrayList<>(); //Kalender-Liste für Ueberweisungen 
 	private final ArrayList listC1 = new ArrayList(); //Liste Für Ueberweisungen
+	private final ArrayList listC2 = new ArrayList(); //Liste Für Ueberweisungen*/
     /**
      * Konstruktor zum eröffnen eines neuen Kontos
      * @param vorname Vornamen angeben 
@@ -114,6 +116,7 @@ public class Konto {
         this.kontostand += kontostand;
 		listA.add(calA = new GregorianCalendar(jahr,monat,tag));
 		listA1.add(einz);
+		listA2.add("Einzahlung");
     }
 
     /**
@@ -130,8 +133,9 @@ public class Konto {
 		{
 			this.abzug = abheben;
             this.kontostand -= abheben;
-			listB.add(calB = new GregorianCalendar(jahr,monat,tag));
-			listB1.add(abzug);
+			listA.add(calA = new GregorianCalendar(jahr,monat,tag));
+			listA1.add(abzug);
+			listA2.add("Abbuchung");
 		}
         else
             System.out.println("Dispo nicht ausreichend");
@@ -152,8 +156,9 @@ public class Konto {
 		{
 			this.ueber = betrag;
             empfaenger.einzahlen(betrag, jahr, monat, tag);
-			listC.add(calC = new GregorianCalendar(jahr,monat,tag));
-			listC1.add(ueber);
+			listA.add(calA = new GregorianCalendar(jahr,monat,tag));
+			listA1.add(ueber);
+			listA2.add("Überweisung");
 		}
     }
     
@@ -219,43 +224,27 @@ public class Konto {
 			//Collections.sort(listA);
 			for(Calendar cal: listA)
 			{
-				if((calD.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
+				if((calA.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
 				{
-					System.out.printf("Einzahlung von: %d Euro am: %d.%d.%d\n", listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
-					i++;
-				}
-			}
-			for(Calendar cal: listB)
-			{
-				if((calD.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
-				{
-					System.err.printf("Abbuchung von: %d Euro am: %d.%d.%d\n", listB1.get(j),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
-					j++;
-				}
-			}
-			for(Calendar cal: listC)
-			{
-				if((calD.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
-				{
-					System.err.printf("Übertrag von: %d Euro am: %d.%d.%d\n", listC1.get(k),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
-					k++;
+					System.out.printf("%S von: %d Euro am: %d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
+					i++;				
 				}
 			}
 	   }
-	   else
+/*	   else IGNORE MEEEE
 	   {
-		   calD = new GregorianCalendar(jahr,monat,tag);
+		   Calendar calB = new GregorianCalendar(jahr,monat,tag);
 			for(Calendar cal: listA)
 			{
-				if((cal.getTimeInMillis())  >= calD.getTimeInMillis())
+				if((cal.getTimeInMillis())  >= calB.getTimeInMillis())
 				{
-					System.out.printf("Einzahlung von: %d Euro am: %d.%d.%d\n", listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
+					System.out.printf("%S von: %d Euro am: %d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					i++;
 				}
 			}
 			for(Calendar cal: listB)
 			{
-				if((cal.getTimeInMillis())  >= calD.getTimeInMillis())
+				if((cal.getTimeInMillis())  >= calB.getTimeInMillis())
 				{
 					System.err.printf("Abbuchung von: %d Euro am: %d.%d.%d\n", listB1.get(j),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					j++;
@@ -263,13 +252,13 @@ public class Konto {
 			}
 			for(Calendar cal: listC)
 			{
-				if((cal.getTimeInMillis())  >= calD.getTimeInMillis())
+				if((cal.getTimeInMillis())  >= calB.getTimeInMillis())
 				{
 					System.err.printf("Übertrag von: %d Euro am: %d.%d.%d\n", listC1.get(k),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					k++;
 				}
 			}
-	   }
+	   }*/
    }
 
 }
