@@ -23,12 +23,6 @@ public class Konto {
 	private final ArrayList<Calendar> listA = new ArrayList<>(); //Kalender-Liste für Einzahlungen
 	private final ArrayList listA1 = new ArrayList(); //Liste Für Einzahlungen
 	private final ArrayList listA2 = new ArrayList(); //Liste Für Einzahlungen
-/*	private final ArrayList<Calendar> listB = new ArrayList<>(); //Kalender-Liste für Abbuchungen 
-	private final ArrayList listB1 = new ArrayList(); //Liste Für Abbuchungen
-	private final ArrayList listB2 = new ArrayList(); //Liste Für Abbuchungen
-	private final ArrayList<Calendar> listC = new ArrayList<>(); //Kalender-Liste für Ueberweisungen 
-	private final ArrayList listC1 = new ArrayList(); //Liste Für Ueberweisungen
-	private final ArrayList listC2 = new ArrayList(); //Liste Für Ueberweisungen*/
     /**
      * Konstruktor zum eröffnen eines neuen Kontos
      * @param vorname Vornamen angeben 
@@ -73,7 +67,6 @@ public class Konto {
 	 * Zu Testzwecken in Netbeans - Compilerus muchos besserus.
 	 * @param args[] uebergebene Argumente abfragen
 	 */
-	
     public static void main(String args[]) 
     {
 		Konto k = new Konto("lars", "isferding", "vissingkamp", 0,1991,8,30);
@@ -92,7 +85,6 @@ public class Konto {
 		k.ueberweisen(14,k1,2018,3,24);
 		k.getKontoauszug(0, 0, 0);	
     }
-
     /**
      * Funktion zum ausgeben des Kontostands
      * @return int kontostand Gibt den Kontostand aus
@@ -101,7 +93,6 @@ public class Konto {
     {
         return kontostand;
     }
-
     /**
      * Funktion zum einzahlen eines Betrages.
      * @param kontostand Kontostand um gewissen Betrag erhöhen
@@ -117,7 +108,6 @@ public class Konto {
 		listA1.add(einz);
 		listA2.add("Einzahlung");
     }
-
     /**
      * Funktion zum abheben eines Betrages unter Berücksichtigung des Dispos.
      * 
@@ -139,7 +129,6 @@ public class Konto {
         else
             System.out.println("Dispo nicht ausreichend");
     }
-    
     /**
      * Funktion zum überweisen von A nach B
      * @param betrag Betrag welcher überwiesen werden soll
@@ -150,7 +139,6 @@ public class Konto {
      */
     public void ueberweisen(int betrag, Konto empfaenger,int jahr, int monat, int tag) //Geld von A nach B ueberweisen
     {
-        //abheben(betrag,jahr, monat, tag);
         if(kontostand >= (betrag+dispo) && (kontostand+dispo) >= (abzug))
 		{
 			this.ueber = betrag;
@@ -160,7 +148,6 @@ public class Konto {
 			listA2.add("Überweisung");
 		}
     }
-    
     /**
      * Funktion zum ausgeben der Kontonummer
      * @return int kontoNr Gibt die Kontonummer aus
@@ -169,7 +156,6 @@ public class Konto {
     {
         return kontoNr;
     }
-
     /**
      * Funktion zum setzen einer Kontonummer.
      * @param kontoNr übergebene Kontonummer.
@@ -178,7 +164,6 @@ public class Konto {
     {
         this.kontoNr = kontoNr;
     }
-
     /**
      * Funktion zum ausgeben des Inhabers.
      * @return inhaber Inhaber ausgeben
@@ -189,7 +174,6 @@ public class Konto {
 		return inhaber;
        // return ("Vorname: " + inhaber.getVorname() +" Nachname: "+ inhaber.getNachname() + " Adresse: " + inhaber.getAdresse());
     }   
-    
     /**
      *  Funktion zum Inanspruch nehmen eines Dispos
      *  @param dispo setzen einer Dispogrenze
@@ -198,7 +182,6 @@ public class Konto {
     {
         this.dispo = dispo;
     }
-   
     /**
      * Funktion zum ausgeben des Dispos
      * @return int dispo ausgeben der Dispogrenze
@@ -207,11 +190,15 @@ public class Konto {
    {
         return dispo;    
    }
+   /**
+	* Erstellt einen Kontoauszug
+	* @param jahr Jahreszahl übergeben
+	* @param monat Monat übergeben
+	* @param tag  Tag übergeben
+	*/
    public void getKontoauszug(int jahr, int monat, int tag)
    {
 	   int i=0;
-	   int j=0;
-	   int k=0;
 	   System.out.printf("Vorname: %S |Nachname: %S |Adresse: %S |Kontonummer: %d |Guthaben: %d Euro\n", 
 			   getInhaber().getVorname(),
 			   getInhaber().getNachname(),
@@ -220,7 +207,6 @@ public class Konto {
 			   getKontostand());
 	   if(jahr == 0 || monat == 0 || tag == 0)
 	   {
-			//Collections.sort(listA);
 			for(Calendar cal: listA)
 			{
 				if((calA.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
@@ -230,7 +216,7 @@ public class Konto {
 				}
 			}
 	   }
-/*	   else IGNORE MEEEE
+	   else
 	   {
 		   Calendar calB = new GregorianCalendar(jahr,monat,tag);
 			for(Calendar cal: listA)
@@ -241,23 +227,7 @@ public class Konto {
 					i++;
 				}
 			}
-			for(Calendar cal: listB)
-			{
-				if((cal.getTimeInMillis())  >= calB.getTimeInMillis())
-				{
-					System.err.printf("Abbuchung von: %d Euro am: %d.%d.%d\n", listB1.get(j),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
-					j++;
-				}
-			}
-			for(Calendar cal: listC)
-			{
-				if((cal.getTimeInMillis())  >= calB.getTimeInMillis())
-				{
-					System.err.printf("Übertrag von: %d Euro am: %d.%d.%d\n", listC1.get(k),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
-					k++;
-				}
-			}
-	   }*/
-   }
 
+		}
+	}
 }
