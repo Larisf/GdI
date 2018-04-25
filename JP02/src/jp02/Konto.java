@@ -221,7 +221,7 @@ public class Konto {
 			{
 				if((calD.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
 				{
-					System.out.printf("Einzahlung von: %d Euro am: %d.%d.%d\n", listA1.get(i),cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
+					System.out.printf("Einzahlung von: %d Euro am: %d.%d.%d\n", listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					i++;
 				}
 			}
@@ -229,7 +229,7 @@ public class Konto {
 			{
 				if((calD.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
 				{
-					System.err.printf("Abbuchung von: %d Euro am: %d.%d.%d\n", listB1.get(j),cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
+					System.err.printf("Abbuchung von: %d Euro am: %d.%d.%d\n", listB1.get(j),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					j++;
 				}
 			}
@@ -237,7 +237,7 @@ public class Konto {
 			{
 				if((calD.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
 				{
-					System.err.printf("Übertrag von: %d Euro am: %d.%d.%d\n", listC1.get(k),cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
+					System.err.printf("Übertrag von: %d Euro am: %d.%d.%d\n", listC1.get(k),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					k++;
 				}
 			}
@@ -249,7 +249,7 @@ public class Konto {
 			{
 				if((cal.getTimeInMillis())  >= calD.getTimeInMillis())
 				{
-					System.out.printf("Einzahlung von: %d Euro am: %d.%d.%d\n", listA1.get(i),cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
+					System.out.printf("Einzahlung von: %d Euro am: %d.%d.%d\n", listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					i++;
 				}
 			}
@@ -257,7 +257,7 @@ public class Konto {
 			{
 				if((cal.getTimeInMillis())  >= calD.getTimeInMillis())
 				{
-					System.err.printf("Abbuchung von: %d Euro am: %d.%d.%d\n", listB1.get(j),cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
+					System.err.printf("Abbuchung von: %d Euro am: %d.%d.%d\n", listB1.get(j),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					j++;
 				}
 			}
@@ -265,7 +265,7 @@ public class Konto {
 			{
 				if((cal.getTimeInMillis())  >= calD.getTimeInMillis())
 				{
-					System.err.printf("Übertrag von: %d Euro am: %d.%d.%d\n", listC1.get(k),cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
+					System.err.printf("Übertrag von: %d Euro am: %d.%d.%d\n", listC1.get(k),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
 					k++;
 				}
 			}
