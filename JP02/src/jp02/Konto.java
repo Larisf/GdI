@@ -170,9 +170,7 @@ public class Konto {
      */
     public Inhaber getInhaber() //Inhaber ausgeben (Konsole)
     {
-        //System.out.println(inhaber.getVorname()+"\n"+inhaber.getNachname()+"\n"+inhaber.getAdresse());
 		return inhaber;
-       // return ("Vorname: " + inhaber.getVorname() +" Nachname: "+ inhaber.getNachname() + " Adresse: " + inhaber.getAdresse());
     }   
     /**
      *  Funktion zum Inanspruch nehmen eines Dispos
