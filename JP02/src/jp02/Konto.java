@@ -2,7 +2,6 @@ package jp02;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Iterator;
 /**
  * Klasse zum erstellen eines Kontos.
  *
@@ -19,7 +18,7 @@ public class Konto
 	private double zinssatz;
     private int dispo;
 	private int abzug,einz,ueber;
-	private ArrayList<Kontobewegung> obj = new ArrayList();
+	private ArrayList<Kontobewegung> kontobewegung = new ArrayList();
 
 	/**
      * Konstruktor zum eröffnen eines neuen Kontos
@@ -121,7 +120,7 @@ public class Konto
     {
 		this.einz = kontostand;
         this.kontostand += kontostand;
-		obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.EINZAHLUNG,einz));
+		kontobewegung.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.EINZAHLUNG,einz));
     }
    
 	/**
@@ -138,7 +137,7 @@ public class Konto
 		{
 			this.abzug = abheben;
             this.kontostand -= abheben;
-			obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.ABBUCHUNG,abzug));
+			kontobewegung.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.ABBUCHUNG,abzug));
 		}
 		else if(kontoTyp == 0)
             System.out.println("Dispo nicht ausreichend");
@@ -160,7 +159,7 @@ public class Konto
 		{
 			this.ueber = betrag;
 			empfaenger.einzahlen(betrag, jahr, monat, tag);
-			obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.UEBERWEISUNG,ueber));
+			kontobewegung.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.UEBERWEISUNG,ueber));
 		}
     }
    
@@ -258,11 +257,12 @@ public class Konto
    public void getKontoauszug(int jahr, int monat, int tag)
    {
 		Calendar cal = Calendar.getInstance();
-		Collections.sort(obj,new Compare());
+		Collections.sort(kontobewegung,new Compare());
 		System.out.printf("Vorname: %S |Nachname: %S |Adresse: %S |Kontonummer: %d |Guthaben: %.2f Euro\nART\t\tMENGE\tDATUM\n",getInhaber().getVorname(),getInhaber().getNachname(),getInhaber().getAdresse(),getKontoNr(),getKontostand());
 		if(jahr == 0 || monat == 0 || tag == 0)
 		{
-			for (Kontobewegung konto : obj) {
+			for (Kontobewegung konto : kontobewegung) 
+			{
 				if(cal.getTimeInMillis() - konto.getTimeInMillis() <= 30)
 					System.out.printf("%s\t%d\t%s\n",konto.getArt(),konto.getBetrag(),konto.getDatum());
 			}
@@ -270,7 +270,7 @@ public class Konto
 		else
 		{
 		    cal.set(jahr, monat, tag);
-			for(Kontobewegung konto: obj)
+			for(Kontobewegung konto: kontobewegung)
 				if(konto.getTimeInMillis() >= cal.getTimeInMillis())
 					System.out.printf("%s\t%d\t%s\n",konto.getArt(),konto.getBetrag(),konto.getDatum());
 		}
