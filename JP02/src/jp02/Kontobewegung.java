@@ -14,8 +14,8 @@ public class Kontobewegung
 {
 	private Kalender kalender;
 	private KontoTyp kontotyp;
-	private int betrag;
-	Kontobewegung(Kalender k, KontoTyp kT, int betrag)
+	private double betrag;
+	Kontobewegung(Kalender k, KontoTyp kT, double betrag)
 	{
 		this.kalender = k;
 		this.kontotyp = kT;
@@ -33,7 +33,7 @@ public class Kontobewegung
 	{
 		return this.kontotyp;
 	}
-	public int getBetrag()
+	public double getBetrag()
 	{
 		return this.betrag;
 	}

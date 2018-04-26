@@ -13,9 +13,15 @@ import java.util.Comparator;
  */
 public class Compare implements Comparator<Kontobewegung> {
 
+	/**
+	 * Objekte vergleichen und zurückgeben
+	 * @param kB1 Objekt 1 Übergeben
+	 * @param kB2 Objekt 2 Übergeben
+	 * @return Vergleichswert
+	 */
 	@Override
-	public int compare(Kontobewegung o1, Kontobewegung o2) {
-		return Double.compare(o1.getTimeInMillis(), o2.getTimeInMillis());
+	public int compare(Kontobewegung kB1, Kontobewegung kB2) {
+		return Double.compare(kB1.getTimeInMillis(), kB2.getTimeInMillis());
 	}
 	
 }
