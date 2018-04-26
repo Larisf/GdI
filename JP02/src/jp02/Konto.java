@@ -17,7 +17,7 @@ public class Konto
     private final Inhaber inhaber;
 	private double zinssatz;
     private int dispo;
-	private int abzug,einz,ueber;
+	private double abzug,einz,ueber;
 	private ArrayList<Kontobewegung> kontobewegung = new ArrayList();
 
 	/**
@@ -30,7 +30,7 @@ public class Konto
     {
         kontoNr = kontoNr+anzKonten;
         anzKonten++;
-        inhaber = new Inhaber(vorname,nachname,adresse);
+        inhaber = new Inhaber(vorname.toUpperCase(),nachname.toUpperCase(),adresse.toUpperCase());
 	}
     
 	/**
@@ -46,7 +46,7 @@ public class Konto
         anzKonten++;
 		this.kontostand = einzahlung;
         //obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.ERÖFFNUNG,abzug));
-		inhaber = new Inhaber(vorname,nachname,adresse);
+		inhaber = new Inhaber(vorname.toUpperCase(),nachname.toUpperCase(),adresse.toUpperCase());
     }   
     
 	/**
@@ -62,7 +62,7 @@ public class Konto
         anzKonten++;
         empfaenger.einzahlen(60,jahr,monat,tag);
         //obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.FREUNDSCHAFTSBONUS,abzug));
-		inhaber = new Inhaber(vorname,nachname,adresse);
+		inhaber = new Inhaber(vorname.toUpperCase(),nachname.toUpperCase(),adresse.toUpperCase());
     }
 	
 	/**
@@ -79,7 +79,7 @@ public class Konto
         kontoNr = kontoNr+anzKonten;
         anzKonten++;
         this.kontostand = einzahlung;
-        inhaber = new Inhaber(vorname,nachname,adresse);
+        inhaber = new Inhaber(vorname.toUpperCase(),nachname.toUpperCase(),adresse.toUpperCase());
 		this.zinssatz = zinssatz;
     }   
 	
@@ -100,7 +100,7 @@ public class Konto
 		k.abheben(30,2018,4,1);
 		k.abheben(20,2018,4,2);
 		k.abheben(40,2018,4,7);
-		k.ueberweisen(13,k1,2018,4,12);
+		k.ueberweisen(13.45,k1,2018,4,12);
 		k.ueberweisen(12,k1,2018,4,15);
 		k.ueberweisen(14,k1,2018,4,11);
 		k.getKontoauszug(0, 0, 0);
@@ -116,7 +116,7 @@ public class Konto
 	 * @param monat Monat der Einzahlung
 	 * @param tag Tag der Einzahlung
      */
-    public void einzahlen(int kontostand,int jahr, int monat, int tag) //Geld einzahlen
+    public void einzahlen(double kontostand,int jahr, int monat, int tag) //Geld einzahlen
     {
 		this.einz = kontostand;
         this.kontostand += kontostand;
@@ -125,7 +125,7 @@ public class Konto
    
 	/**
      * Funktion zum abheben eines Betrages unter Berücksichtigung des Dispos.
-     * 
+     * Sparkonten werden berücksichtigt
      * @param abheben Betrag, welcher abgehoben werden soll.
 	 * @param jahr Jahreszahl der Abbuchung
 	 * @param monat der Abbuchung
@@ -153,7 +153,7 @@ public class Konto
 	 * @param monat Monat der Ueberweisung
 	 * @param tag Tag der Ueberweisung
      */
-    public void ueberweisen(int betrag, Konto empfaenger,int jahr, int monat, int tag) //Geld von A nach B ueberweisen
+    public void ueberweisen(double betrag, Konto empfaenger,int jahr, int monat, int tag) //Geld von A nach B ueberweisen
     {
         if(kontostand >= (betrag+dispo) && (kontostand+dispo) >= (abzug))
 		{
@@ -201,6 +201,7 @@ public class Konto
     
 	/**
      *  Funktion zum Inanspruch nehmen eines Dispos
+	 * Sparkonten erhalten keinen Dispo
      *  @param dispo setzen einer Dispogrenze
      */
     public void setDispo(int dispo)
@@ -258,13 +259,13 @@ public class Konto
    {
 		Calendar cal = Calendar.getInstance();
 		Collections.sort(kontobewegung,new Compare());
-		System.out.printf("Vorname: %S |Nachname: %S |Adresse: %S |Kontonummer: %d |Guthaben: %.2f Euro\nART\t\tMENGE\tDATUM\n",getInhaber().getVorname(),getInhaber().getNachname(),getInhaber().getAdresse(),getKontoNr(),getKontostand());
+		System.out.printf("\nVORNAME:...%S |NACHNAME:...%S |ADRESSE:...%S |KONTONUMMER:...%d |GUTHABEN:...%.2f EURO\nART\t\tMENGE\tDATUM\n",getInhaber().getVorname(),getInhaber().getNachname(),getInhaber().getAdresse(),getKontoNr(),getKontostand());
 		if(jahr == 0 || monat == 0 || tag == 0)
 		{
-			for (Kontobewegung konto : kontobewegung) 
+			for(Kontobewegung konto : kontobewegung) 
 			{
 				if(cal.getTimeInMillis() - konto.getTimeInMillis() <= 30)
-					System.out.printf("%s\t%d\t%s\n",konto.getArt(),konto.getBetrag(),konto.getDatum());
+					System.out.printf("%s\t%.2f\t%s\n",konto.getArt(),konto.getBetrag(),konto.getDatum());
 			}
 		}
 		else
