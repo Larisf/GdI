@@ -1,8 +1,8 @@
 package jp02;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-
+import java.util.Collections;
+import java.util.Iterator;
 /**
  * Klasse zum erstellen eines Kontos.
  *
@@ -19,11 +19,8 @@ public class Konto
 	private double zinssatz;
     private int dispo;
 	private int abzug,einz,ueber;
-	private Calendar calA;
-	private final ArrayList<Calendar> listA = new ArrayList<>(); //Kalender-Liste für Einzahlungen
-	private final ArrayList listA1 = new ArrayList(); //Liste Für Einzahlungen
-	private final ArrayList listA2 = new ArrayList(); //Liste Für Einzahlungen
-    
+	private ArrayList<Kontobewegung> obj = new ArrayList();
+
 	/**
      * Konstruktor zum eröffnen eines neuen Kontos
      * @param vorname Vornamen angeben 
@@ -48,8 +45,9 @@ public class Konto
     {
         kontoNr = kontoNr+anzKonten;
         anzKonten++;
-        this.kontostand = einzahlung;
-        inhaber = new Inhaber(vorname,nachname,adresse);
+		this.kontostand = einzahlung;
+        //obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.ERÖFFNUNG,abzug));
+		inhaber = new Inhaber(vorname,nachname,adresse);
     }   
     
 	/**
@@ -64,7 +62,8 @@ public class Konto
         kontoNr = kontoNr+anzKonten;
         anzKonten++;
         empfaenger.einzahlen(60,jahr,monat,tag);
-        inhaber = new Inhaber(vorname,nachname,adresse);
+        //obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.FREUNDSCHAFTSBONUS,abzug));
+		inhaber = new Inhaber(vorname,nachname,adresse);
     }
 	
 	/**
@@ -91,21 +90,24 @@ public class Konto
 	 */
     public static void main(String args[]) 
     {
-		Konto k = new Konto("lars", "isferding", "vissingkamp", 0,1991,8,30);
-		Konto k1 = new Konto("lars", "isferding", "vissingkamp");
-		k.einzahlen(200,2018,4,24);
-		k.abheben(20,2018,4,24);
-		k.einzahlen(130,2018,4,1);
-		k.ueberweisen(20,k1,2018,4,24);
-		k.einzahlen(120,2018,3,30);
-		k.einzahlen(140,2018,3,24);
+		Konto k = new Konto("lars", "isferding", "vissingkamp", 0,2018,4,10);
+		Konto k1 = new Konto("Gustav", "Gans", "Entenhausen",100,0,2018,4,15);
+		k.einzahlen(200,2018,2,1);
+		k.abheben(20,2018,3,2);
+		k.einzahlen(130,2018,4,5);
+		k.ueberweisen(20,k1,2018,4,4);
+		k.einzahlen(120,2018,4,2);
+		k.einzahlen(140,2018,4,8);
 		k.abheben(30,2018,4,1);
-		k.abheben(20,2018,3,30);
-		k.abheben(40,2018,3,24);
-		k.ueberweisen(13,k1,2018,4,1);
-		k.ueberweisen(12,k1,2018,3,30);
-		k.ueberweisen(14,k1,2018,3,24);
-		k.getKontoauszug(0, 0, 0);	
+		k.abheben(20,2018,4,2);
+		k.abheben(40,2018,4,7);
+		k.ueberweisen(13,k1,2018,4,12);
+		k.ueberweisen(12,k1,2018,4,15);
+		k.ueberweisen(14,k1,2018,4,11);
+		k.getKontoauszug(0, 0, 0);
+		k1.setZinssatz(25);
+		k1.zinszahlung();
+		k1.getKontoauszug(0, 0, 0);
     }
     
 	/**
@@ -119,9 +121,7 @@ public class Konto
     {
 		this.einz = kontostand;
         this.kontostand += kontostand;
-		listA.add(calA = new GregorianCalendar(jahr,monat,tag));
-		listA1.add(einz);
-		listA2.add("Einzahlung");
+		obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.EINZAHLUNG,einz));
     }
    
 	/**
@@ -138,13 +138,11 @@ public class Konto
 		{
 			this.abzug = abheben;
             this.kontostand -= abheben;
-			listA.add(calA = new GregorianCalendar(jahr,monat,tag));
-			listA1.add(abzug);
-			listA2.add("Abbuchung");
+			obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.ABBUCHUNG,abzug));
 		}
 		else if(kontoTyp == 0)
             System.out.println("Dispo nicht ausreichend");
-		else if(kontoTyp == 1)
+		else
 			System.out.println("Kein negatives Guthaben erlaubt bei Sparkonten!");
     }
     
@@ -161,10 +159,8 @@ public class Konto
         if(kontostand >= (betrag+dispo) && (kontostand+dispo) >= (abzug))
 		{
 			this.ueber = betrag;
-            empfaenger.einzahlen(betrag, jahr, monat, tag);
-			listA.add(calA = new GregorianCalendar(jahr,monat,tag));
-			listA1.add(ueber);
-			listA2.add("Überweisung");
+			empfaenger.einzahlen(betrag, jahr, monat, tag);
+			obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.UEBERWEISUNG,ueber));
 		}
     }
    
@@ -261,32 +257,22 @@ public class Konto
 	*/
    public void getKontoauszug(int jahr, int monat, int tag)
    {
-	   int i=0;
-	   System.out.printf("Vorname: %S |Nachname: %S |Adresse: %S |Kontonummer: %d |Guthaben: %.2f Euro\n", 
-			   getInhaber().getVorname(),
-			   getInhaber().getNachname(),
-			   getInhaber().getAdresse(),
-			   getKontoNr(),
-			   getKontostand());
-	   System.out.printf("ART\t\tMENGE\tDATUM\n");
-	   if(jahr == 0 || monat == 0 || tag == 0)
-	   {
-			for(Calendar cal: listA)
-				if((calA.getTimeInMillis() - cal.getTimeInMillis())  <= 30)
-				{
-					System.out.printf("%S\t%d\t%d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
-					i++;				
-				}
-	   }
-	   else
-	   {
-		    Calendar calB = new GregorianCalendar(jahr,monat,tag);
-			for(Calendar cal: listA)
-				if((cal.getTimeInMillis())  >= calB.getTimeInMillis())
-				{
-					System.out.printf("%S\t%d\t%d.%d.%d\n", listA2.get(i),listA1.get(i),cal.get(Calendar.DATE),cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
-					i++;
-				}
+		Calendar cal = Calendar.getInstance();
+		Collections.sort(obj,new Compare());
+		System.out.printf("Vorname: %S |Nachname: %S |Adresse: %S |Kontonummer: %d |Guthaben: %.2f Euro\nART\t\tMENGE\tDATUM\n",getInhaber().getVorname(),getInhaber().getNachname(),getInhaber().getAdresse(),getKontoNr(),getKontostand());
+		if(jahr == 0 || monat == 0 || tag == 0)
+		{
+			for (Kontobewegung konto : obj) {
+				if(cal.getTimeInMillis() - konto.getTimeInMillis() <= 30)
+					System.out.printf("%s\t%d\t%s\n",konto.getArt(),konto.getBetrag(),konto.getDatum());
+			}
+		}
+		else
+		{
+		    cal.set(jahr, monat, tag);
+			for(Kontobewegung konto: obj)
+				if(konto.getTimeInMillis() >= cal.getTimeInMillis())
+					System.out.printf("%s\t%d\t%s\n",konto.getArt(),konto.getBetrag(),konto.getDatum());
 		}
 	}
 }
