@@ -9,7 +9,7 @@ import java.util.Collections;
  */
 public class Konto 
 {
-    private static int anzKonten = 100000000;
+    private static int anzKonten = 1;
     private double kontostand, zinssatz, abbuchung;
     private int kontoNr, dispo;
 	private int kontoTyp = 0;
