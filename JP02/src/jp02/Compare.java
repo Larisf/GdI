@@ -1,18 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp02;
-
 import java.util.Comparator;
 
 /**
- *
+ * Klasse zum vergleichen von Objekten
  * @author Bambi
  */
-public class Compare implements Comparator<Kontobewegung> {
-
+public class Compare implements Comparator<Kontoauszug>
+{
 	/**
 	 * Objekte vergleichen und zurückgeben
 	 * @param kB1 Objekt 1 Übergeben
@@ -20,8 +14,8 @@ public class Compare implements Comparator<Kontobewegung> {
 	 * @return Vergleichswert
 	 */
 	@Override
-	public int compare(Kontobewegung kB1, Kontobewegung kB2) {
+	public int compare(Kontoauszug kB1, Kontoauszug kB2) 
+	{
 		return Double.compare(kB1.getTimeInMillis(), kB2.getTimeInMillis());
-	}
-	
+	}	
 }

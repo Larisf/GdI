@@ -1,5 +1,9 @@
 package jp02;
 
+/**
+ * Klasse zum erstellen eines Inhabers
+ * @author Bambi
+ */
 public class Inhaber
 {
     private final String vorname;

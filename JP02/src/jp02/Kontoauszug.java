@@ -1,24 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp02;
-
 import java.util.Calendar;
 /**
- *
+ * Klasse zur Verwaltung des Kontoauszugs
  * @author Bambi
  */
-public class Kontobewegung
+public class Kontoauszug
 {
 	private Kalender kalender;
 	private KontoTyp kontotyp;
 	private double betrag;
-	Kontobewegung(Kalender k, KontoTyp kT, double betrag)
+	Kontoauszug(Kalender kalender, KontoTyp kontotyp, double betrag)
 	{
-		this.kalender = k;
-		this.kontotyp = kT;
+		this.kalender = kalender;
+		this.kontotyp = kontotyp;
 		this.betrag = betrag;
 	}
 	public String getDatum()

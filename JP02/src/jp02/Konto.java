@@ -4,21 +4,18 @@ import java.util.Calendar;
 import java.util.Collections;
 /**
  * Klasse zum erstellen eines Kontos.
- *
  * @author Lars Isferding
- * @version 13.4.2018
+ * @version 27.4.2018
  */
 public class Konto 
 {
     private static int anzKonten = 100000000;
-    private double kontostand;
-    private int kontoNr;
+    private double kontostand, zinssatz, abbuchung;
+    private int kontoNr, dispo;
 	private int kontoTyp = 0;
     private final Inhaber inhaber;
-	private double zinssatz;
-    private int dispo;
-	private double abzug,einz,ueber;
-	private ArrayList<Kontobewegung> kontobewegung = new ArrayList();
+	private final Calendar cal = Calendar.getInstance();
+	private final ArrayList<Kontoauszug> kontoauszugListe = new ArrayList();
 
 	/**
      * Konstruktor zum eröffnen eines neuen Kontos
@@ -45,8 +42,7 @@ public class Konto
         kontoNr = kontoNr+anzKonten;
         anzKonten++;
 		this.kontostand = einzahlung;
-        //obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.ERÖFFNUNG,abzug));
-		inhaber = new Inhaber(vorname.toUpperCase(),nachname.toUpperCase(),adresse.toUpperCase());
+        inhaber = new Inhaber(vorname.toUpperCase(),nachname.toUpperCase(),adresse.toUpperCase());
     }   
     
 	/**
@@ -61,8 +57,7 @@ public class Konto
         kontoNr = kontoNr+anzKonten;
         anzKonten++;
         empfaenger.einzahlen(60,jahr,monat,tag);
-        //obj.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.FREUNDSCHAFTSBONUS,abzug));
-		inhaber = new Inhaber(vorname.toUpperCase(),nachname.toUpperCase(),adresse.toUpperCase());
+        inhaber = new Inhaber(vorname.toUpperCase(),nachname.toUpperCase(),adresse.toUpperCase());
     }
 	
 	/**
@@ -73,7 +68,7 @@ public class Konto
      * @param einzahlung betrag zum einzahlen angeben
 	 * @param zinssatz Zinssatz setzen
      */
-    Konto(String vorname, String nachname, String adresse, int einzahlung,double zinssatz, int jahr, int monat, int tag) //Konto eröffnen mit Einzahlung
+    Konto(String vorname, String nachname, String adresse, int einzahlung,double zinssatz, int jahr, int monat, int tag) //Sparkonto eröffnen mit Einzahlung
     {
 		kontoTyp = 1;
         kontoNr = kontoNr+anzKonten;
@@ -111,33 +106,32 @@ public class Konto
     
 	/**
      * Funktion zum einzahlen eines Betrages.
-     * @param kontostand Kontostand um gewissen Betrag erhöhen
+     * @param einzahlung Kontostand um gewissen Betrag erhöhen
 	 * @param jahr Jahreszahl der Einzahlung
 	 * @param monat Monat der Einzahlung
 	 * @param tag Tag der Einzahlung
      */
-    public void einzahlen(double kontostand,int jahr, int monat, int tag) //Geld einzahlen
+    public void einzahlen(double einzahlung,int jahr, int monat, int tag) //Geld einzahlen
     {
-		this.einz = kontostand;
-        this.kontostand += kontostand;
-		kontobewegung.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.EINZAHLUNG,einz));
+		this.kontostand += einzahlung;
+		kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),KontoTyp.EINZAHLUNG,einzahlung));
     }
    
 	/**
-     * Funktion zum abheben eines Betrages unter Berücksichtigung des Dispos.
+     * Funktion zum abbuchung eines Betrages unter Berücksichtigung des Dispos.
      * Sparkonten werden berücksichtigt
-     * @param abheben Betrag, welcher abgehoben werden soll.
+     * @param abbuchung Betrag, welcher abgehoben werden soll.
 	 * @param jahr Jahreszahl der Abbuchung
 	 * @param monat der Abbuchung
 	 * @param tag  der Abbuchung
      */
-    public void abheben(int abheben,int jahr, int monat, int tag) //Geld abheben
+    public void abheben(int abbuchung,int jahr, int monat, int tag) //Geld abbuchung
     {
-        if((kontostand+dispo) >= (abheben))
+        if((kontostand+dispo) >= (abbuchung))
 		{
-			this.abzug = abheben;
-            this.kontostand -= abheben;
-			kontobewegung.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.ABBUCHUNG,abzug));
+			this.abbuchung = abbuchung;
+            this.kontostand -= abbuchung;
+			kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),KontoTyp.ABBUCHUNG,abbuchung));
 		}
 		else if(kontoTyp == 0)
             System.out.println("Dispo nicht ausreichend");
@@ -147,19 +141,18 @@ public class Konto
     
 	/**
      * Funktion zum überweisen von A nach B
-     * @param betrag Betrag welcher überwiesen werden soll
+     * @param ueberweisung Betrag welcher überwiesen werden soll
      * @param empfaenger Empfaenger Konto auswählen
 	 * @param jahr Jahreszahl der Ueberweisung
 	 * @param monat Monat der Ueberweisung
 	 * @param tag Tag der Ueberweisung
      */
-    public void ueberweisen(double betrag, Konto empfaenger,int jahr, int monat, int tag) //Geld von A nach B ueberweisen
+    public void ueberweisen(double ueberweisung, Konto empfaenger,int jahr, int monat, int tag) //Geld von A nach B ueberweisen
     {
-        if(kontostand >= (betrag+dispo) && (kontostand+dispo) >= (abzug))
+        if(kontostand >= (ueberweisung+dispo) && (kontostand+dispo) >= (abbuchung))
 		{
-			this.ueber = betrag;
-			empfaenger.einzahlen(betrag, jahr, monat, tag);
-			kontobewegung.add(new Kontobewegung(new Kalender(tag,monat,jahr),KontoTyp.UEBERWEISUNG,ueber));
+			empfaenger.einzahlen(ueberweisung, jahr, monat, tag);
+			kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),KontoTyp.UEBERWEISUNG,ueberweisung));
 		}
     }
    
@@ -201,7 +194,7 @@ public class Konto
     
 	/**
      *  Funktion zum Inanspruch nehmen eines Dispos
-	 * Sparkonten erhalten keinen Dispo
+	 *  Sparkonten erhalten keinen Dispo
      *  @param dispo setzen einer Dispogrenze
      */
     public void setDispo(int dispo)
@@ -255,23 +248,20 @@ public class Konto
 	* @param monat Monat übergeben
 	* @param tag  Tag übergeben
 	*/
-   public void getKontoauszug(int jahr, int monat, int tag)
-   {
-		Calendar cal = Calendar.getInstance();
-		Collections.sort(kontobewegung,new Compare());
+	public void getKontoauszug(int jahr, int monat, int tag)
+	{
+		Collections.sort(kontoauszugListe,new Compare());
 		System.out.printf("\nVORNAME:...%S |NACHNAME:...%S |ADRESSE:...%S |KONTONUMMER:...%d |GUTHABEN:...%.2f EURO\nART\t\tMENGE\tDATUM\n",getInhaber().getVorname(),getInhaber().getNachname(),getInhaber().getAdresse(),getKontoNr(),getKontostand());
 		if(jahr == 0 || monat == 0 || tag == 0)
 		{
-			for(Kontobewegung konto : kontobewegung) 
-			{
-				if(cal.getTimeInMillis() - konto.getTimeInMillis() <= 30)
-					System.out.printf("%s\t%.2f\t%s\n",konto.getArt(),konto.getBetrag(),konto.getDatum());
-			}
+			for(Kontoauszug kontoauszug : kontoauszugListe) 
+				if(cal.getTimeInMillis() - kontoauszug.getTimeInMillis() <= 30)
+					System.out.printf("%s\t%.2f\t%s\n",kontoauszug.getArt(),kontoauszug.getBetrag(),kontoauszug.getDatum());
 		}
 		else
 		{
 		    cal.set(jahr, monat, tag);
-			for(Kontobewegung konto: kontobewegung)
+			for(Kontoauszug konto: kontoauszugListe)
 				if(konto.getTimeInMillis() >= cal.getTimeInMillis())
 					System.out.printf("%s\t%d\t%s\n",konto.getArt(),konto.getBetrag(),konto.getDatum());
 		}
