@@ -7,12 +7,12 @@ import java.util.Calendar;
 public class Kontoauszug
 {
 	private Kalender kalender;
-	private KontoTyp kontotyp;
+	private Kontobewegung kontobewegung;
 	private double betrag;
-	Kontoauszug(Kalender kalender, KontoTyp kontotyp, double betrag)
+	Kontoauszug(Kalender kalender, Kontobewegung kontobewegung, double betrag)
 	{
 		this.kalender = kalender;
-		this.kontotyp = kontotyp;
+		this.kontobewegung = kontobewegung;
 		this.betrag = betrag;
 	}
 	public String getDatum()
@@ -23,9 +23,9 @@ public class Kontoauszug
 	{
 		return kalender.getDatum().getTimeInMillis();
 	}
-	public KontoTyp getArt()
+	public Kontobewegung getArt()
 	{
-		return this.kontotyp;
+		return this.kontobewegung;
 	}
 	public double getBetrag()
 	{

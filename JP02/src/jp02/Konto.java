@@ -114,7 +114,7 @@ public class Konto
     public void einzahlen(double einzahlung,int jahr, int monat, int tag) //Geld einzahlen
     {
 		this.kontostand += einzahlung;
-		kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),KontoTyp.EINZAHLUNG,einzahlung));
+		kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),Kontobewegung.EINZAHLUNG,einzahlung));
     }
    
 	/**
@@ -131,7 +131,7 @@ public class Konto
 		{
 			this.abbuchung = abbuchung;
             this.kontostand -= abbuchung;
-			kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),KontoTyp.ABBUCHUNG,abbuchung));
+			kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),Kontobewegung.ABBUCHUNG,abbuchung));
 		}
 		else if(kontoTyp == 0)
             System.out.println("Dispo nicht ausreichend");
@@ -152,7 +152,7 @@ public class Konto
         if(kontostand >= (ueberweisung+dispo) && (kontostand+dispo) >= (abbuchung))
 		{
 			empfaenger.einzahlen(ueberweisung, jahr, monat, tag);
-			kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),KontoTyp.UEBERWEISUNG,ueberweisung));
+			kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),Kontobewegung.UEBERWEISUNG,ueberweisung));
 		}
     }
    
