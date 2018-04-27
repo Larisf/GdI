@@ -24,5 +24,17 @@ public class Kalender {
 	public Calendar getDatum()
 	{
 		return calendar;
-	}	
+	}
+	public int getTag()
+	{
+		return calendar.get(Calendar.DATE);
+	}
+	public int getMonat()
+	{
+		return calendar.get(Calendar.MONTH);
+	}
+	public int getJahr()
+	{
+		return calendar.get(Calendar.YEAR);
+	}
 }

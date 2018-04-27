@@ -16,6 +16,6 @@ public class Compare implements Comparator<Kontoauszug>
 	@Override
 	public int compare(Kontoauszug kB1, Kontoauszug kB2) 
 	{
-		return Double.compare(kB1.getTimeInMillis(), kB2.getTimeInMillis());
+		return Long.compare(kB1.getTimeInMillis(), kB2.getTimeInMillis());
 	}	
 }

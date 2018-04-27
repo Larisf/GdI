@@ -14,7 +14,7 @@ public class Konto
     private int kontoNr, dispo;
 	private int kontoTyp = 0;
     private final Inhaber inhaber;
-	private final Calendar cal = Calendar.getInstance();
+	private final Calendar calendar = Calendar.getInstance();
 	private final ArrayList<Kontoauszug> kontoauszugListe = new ArrayList();
 
 	/**
@@ -86,21 +86,22 @@ public class Konto
     {
 		Konto k = new Konto("lars", "isferding", "vissingkamp", 0,2018,4,10);
 		Konto k1 = new Konto("Gustav", "Gans", "Entenhausen",100,0,2018,4,15);
-		k.einzahlen(200,2018,2,1);
+		k.einzahlen(200,2018,2,29);
+		k.abheben(20,2018,12,32);
+		k.einzahlen(130,1999,12,2);
+		k.ueberweisen(20,k1,2017,1,4);
+		k.einzahlen(120,2017,4,2);
+		k.einzahlen(140,2017,4,8);
+		k.abheben(30,2018,3,1);
 		k.abheben(20,2018,3,2);
-		k.einzahlen(130,2018,4,5);
-		k.ueberweisen(20,k1,2018,4,4);
-		k.einzahlen(120,2018,4,2);
-		k.einzahlen(140,2018,4,8);
-		k.abheben(30,2018,4,1);
-		k.abheben(20,2018,4,2);
-		k.abheben(40,2018,4,7);
+		k.abheben(40,2018,3,7);
 		k.ueberweisen(13.45,k1,2018,4,12);
 		k.ueberweisen(12,k1,2018,4,15);
 		k.ueberweisen(14,k1,2018,4,11);
-		k.getKontoauszug(0, 0, 0);
+		k.getKontoauszug(2018, 4, 1);
 		k1.setZinssatz(25);
 		k1.zinszahlung();
+		k1.einzahlen(212, 2018, 4, 20);
 		k1.getKontoauszug(0, 0, 0);
     }
     
@@ -255,15 +256,15 @@ public class Konto
 		if(jahr == 0 || monat == 0 || tag == 0)
 		{
 			for(Kontoauszug kontoauszug : kontoauszugListe) 
-				if(cal.getTimeInMillis() - kontoauszug.getTimeInMillis() <= 30)
-					System.out.printf("%s\t%.2f\t%s\n",kontoauszug.getArt(),kontoauszug.getBetrag(),kontoauszug.getDatum());
+				if(calendar.getTimeInMillis() - kontoauszug.getTimeInMillis() <= 30)
+					System.out.printf("%s\t%.2f\t%s\n",kontoauszug.getArt(),kontoauszug.getBetrag(),kontoauszug.printDatum());
 		}
 		else
 		{
-		    cal.set(jahr, monat, tag);
-			for(Kontoauszug konto: kontoauszugListe)
-				if(konto.getTimeInMillis() >= cal.getTimeInMillis())
-					System.out.printf("%s\t%d\t%s\n",konto.getArt(),konto.getBetrag(),konto.getDatum());
+		    calendar.set(jahr, monat, tag);
+			for(Kontoauszug kontoauszug: kontoauszugListe)
+				if(kontoauszug.getTimeInMillis() >= calendar.getTimeInMillis())
+					System.out.printf("%s\t%.2f\t%s\n",kontoauszug.getArt(),kontoauszug.getBetrag(),kontoauszug.printDatum());
 		}
 	}
 }

@@ -1,5 +1,4 @@
 package jp02;
-import java.util.Calendar;
 /**
  * Klasse zur Verwaltung des Kontoauszugs
  * @author Bambi
@@ -7,17 +6,17 @@ import java.util.Calendar;
 public class Kontoauszug
 {
 	private Kalender kalender;
-	private Kontobewegung kontobewegung;
+	private Kontobewegung kontotyp;
 	private double betrag;
-	Kontoauszug(Kalender kalender, Kontobewegung kontobewegung, double betrag)
+	Kontoauszug(Kalender kalender, Kontobewegung kontotyp, double betrag)
 	{
 		this.kalender = kalender;
-		this.kontobewegung = kontobewegung;
+		this.kontotyp = kontotyp;
 		this.betrag = betrag;
 	}
-	public String getDatum()
+	public String printDatum()
 	{
-		return this.kalender.getDatum().get(Calendar.DATE)+"."+this.kalender.getDatum().get(Calendar.MONTH)+"."+this.kalender.getDatum().get(Calendar.YEAR);
+			return this.kalender.getTag()+"."+this.kalender.getMonat()+"."+this.kalender.getJahr();
 	}
 	public long getTimeInMillis()
 	{
@@ -25,7 +24,7 @@ public class Kontoauszug
 	}
 	public Kontobewegung getArt()
 	{
-		return this.kontobewegung;
+		return this.kontotyp;
 	}
 	public double getBetrag()
 	{
