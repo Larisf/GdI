@@ -13,9 +13,9 @@ public class Konto
     private double kontostand, zinssatz, abbuchung;
     private int kontoNr, dispo;
 	private int kontoTyp = 0;
-    private final Inhaber inhaber;
-	private final Calendar calendar = Calendar.getInstance();
-	private final ArrayList<Kontoauszug> kontoauszugListe = new ArrayList();
+    private Inhaber inhaber;
+	private Calendar calendar = Calendar.getInstance();
+	private ArrayList<Kontoauszug> kontoauszugListe = new ArrayList();
 
 	/**
      * Konstruktor zum eröffnen eines neuen Kontos

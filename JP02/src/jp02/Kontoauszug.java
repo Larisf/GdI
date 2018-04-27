@@ -5,9 +5,9 @@ package jp02;
  */
 public class Kontoauszug
 {
-	private final Kalender kalender;
-	private final Kontobewegung kontotyp;
-	private final double betrag;
+	private Kalender kalender;
+	private Kontobewegung kontotyp;
+	private double betrag;
 	Kontoauszug(Kalender kalender, Kontobewegung kontotyp, double betrag)
 	{
 		this.kalender = kalender;
