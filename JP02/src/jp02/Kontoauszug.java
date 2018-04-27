@@ -22,7 +22,7 @@ public class Kontoauszug
 	{
 		return this.betrag;
 	}
-	public String printDatum()
+		public String printDatum()
 	{
 		return this.kalender.getTag()+"."+this.kalender.getMonat()+"."+this.kalender.getJahr();
 	}
