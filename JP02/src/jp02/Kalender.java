@@ -6,7 +6,7 @@ import java.util.Calendar;
  * @author Bambi
  */
 public class Kalender {
-	private Calendar calendar = Calendar.getInstance();
+	private final Calendar calendar = Calendar.getInstance();
 	/**
 	 * Konstruktor für den Kalender
 	 * @param tag Tag übergeben
