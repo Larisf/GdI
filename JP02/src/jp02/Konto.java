@@ -93,10 +93,10 @@ public class Konto
 		k1.setZinssatz(25);
 		k1.zinszahlung();
 		k1.einzahlen(200, 2018, 3, 30);
-		k1.ueberweisen(10, k, 2018, 2, 29);
+		k1.ueberweisen(10, k, 2018, 2, 28);
 		
 		
-		k.getKontoauszug(2018, 4, 26);
+		k.getKontoauszug(2018, 4, 27);
 		k1.getKontoauszug(0, 0, 0);
 		
     }
@@ -247,17 +247,18 @@ public class Konto
 	*/
 	public void getKontoauszug(int jahr, int monat, int tag)
 	{
+		calendar.add(Calendar.DATE, -30);
 		Collections.sort(kontoauszugListe,new Compare());
 		System.out.printf("\nVORNAME:...%S |NACHNAME:...%S |ADRESSE:...%S |KONTONUMMER:...%d |GUTHABEN:...%.2f EURO\nART\t\tMENGE\tDATUM\n",getInhaber().getVorname(),getInhaber().getNachname(),getInhaber().getAdresse(),getKontoNr(),getKontostand());
 		if(jahr == 0 || monat == 0 || tag == 0)
 		{
 			for(Kontoauszug kontoauszug : kontoauszugListe) 
-				if(calendar.getTimeInMillis() - kontoauszug.getTimeInMillis() <= 30)
+				if(calendar.getTimeInMillis() <= kontoauszug.getTimeInMillis())
 					System.out.printf("%s\t%.2f\t%s\n",kontoauszug.getArt(),kontoauszug.getBetrag(),kontoauszug.printDatum());
 		}
 		else
 		{
-		    calendar.set(jahr, monat, tag);
+		    calendar.set(jahr, monat-1, tag);
 			for(Kontoauszug kontoauszug: kontoauszugListe)
 				if(kontoauszug.getTimeInMillis() <= calendar.getTimeInMillis())
 					System.out.printf("%s\t%.2f\t%s\n",kontoauszug.getArt(),kontoauszug.getBetrag(),kontoauszug.printDatum());

@@ -15,7 +15,7 @@ public class Kalender {
 	 */
 	Kalender(int tag, int monat, int jahr)
 	{
-		this.calendar.set(jahr, monat, tag);
+		this.calendar.set(jahr, monat-1, tag);
 	}
 	/**
 	 * Datum zurückgeben
@@ -31,7 +31,7 @@ public class Kalender {
 	}
 	public int getMonat()
 	{
-		return calendar.get(Calendar.MONTH);
+		return calendar.get(Calendar.MONTH)+1;
 	}
 	public int getJahr()
 	{
