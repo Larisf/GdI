@@ -17,9 +17,9 @@ public class Inhaber
 	 */
 	Inhaber(String vorname, String nachname, String adresse) //Konstruktor von Inhaber
     {
-        this.vorname = vorname;
-        this.nachname = nachname;
-        this.adresse = adresse;
+        this.vorname = vorname.toUpperCase();
+        this.nachname = nachname.toUpperCase();
+        this.adresse = adresse.toUpperCase();
     }
 	/**
 	 * Rückgabe des Vornamens
