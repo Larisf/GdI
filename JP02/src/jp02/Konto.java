@@ -1,7 +1,9 @@
 package jp02;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+
 /**
  * Klasse zum erstellen eines Kontos.
  * @author Lars Isferding
@@ -10,7 +12,7 @@ import java.util.Collections;
 public class Konto 
 {
     private static int anzKonten = 1;
-    private double kontostand, zinssatz, abbuchung;
+    private double kontostand, zinssatz, abbuchung, transGebühr;
     private int kontoNr, dispo;
 	private int kontoTyp = 0;
     private Inhaber inhaber;
@@ -25,9 +27,8 @@ public class Konto
      */
     Konto(String vorname, String nachname, String adresse) //Konto eröffnen
     {
-        kontoNr = kontoNr+anzKonten;
-        anzKonten++;
-        inhaber = new Inhaber(vorname,nachname,adresse);
+        kontoNr = anzKonten++;
+		inhaber = new Inhaber(vorname,nachname,adresse);
 	}
     
 	/**
@@ -39,8 +40,7 @@ public class Konto
      */
     Konto(String vorname, String nachname, String adresse, int einzahlung,int jahr, int monat, int tag) //Konto eröffnen mit Einzahlung
     {
-        kontoNr = kontoNr+anzKonten;
-        anzKonten++;
+        kontoNr = anzKonten++;
 		this.kontostand = einzahlung;
         inhaber = new Inhaber(vorname,nachname,adresse);
     }   
@@ -54,9 +54,8 @@ public class Konto
      */
     Konto(String vorname, String nachname, String adresse, Konto empfaenger,int jahr, int monat, int tag) //Konto eroeffnen mit Freundschaftsbonus von 60€ fuer ein anderes Konto
     {
-        kontoNr = kontoNr+anzKonten;
-        anzKonten++;
-        empfaenger.einzahlen(60,jahr,monat,tag);
+		kontoNr = anzKonten++;
+		empfaenger.einzahlen(60,jahr,monat,tag);
         inhaber = new Inhaber(vorname,nachname,adresse);
     }
 	
@@ -110,10 +109,10 @@ public class Konto
      */
     public void einzahlen(double einzahlung,int jahr, int monat, int tag) //Geld einzahlen
     {
-		this.kontostand += einzahlung;
+		this.kontostand += (einzahlung+transGebühr);
 		kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),Kontobewegung.EINZAHLUNG,einzahlung));
-    }
-   
+	}
+	
 	/**
      * Funktion zum abbuchung eines Betrages unter Berücksichtigung des Dispos.
      * Sparkonten werden berücksichtigt
@@ -127,13 +126,13 @@ public class Konto
         if((kontostand+dispo) >= (abbuchung))
 		{
 			this.abbuchung = abbuchung;
-            this.kontostand -= abbuchung;
+            this.kontostand -= (abbuchung+transGebühr);
 			kontoauszugListe.add(new Kontoauszug(new Kalender(tag,monat,jahr),Kontobewegung.ABBUCHUNG,abbuchung));
 		}
 		else if(kontoTyp == 0)
-            System.out.println("Dispo nicht ausreichend");
+            System.out.printf("Dispo nicht ausreichend\n");
 		else
-			System.out.println("Kein negatives Guthaben erlaubt bei Sparkonten!");
+			System.out.printf("Kein negatives Guthaben erlaubt bei Sparkonten!\n");
     }
     
 	/**
@@ -199,7 +198,7 @@ public class Konto
 		if(kontoTyp == 0)
 			this.dispo = dispo;
 		else
-			System.out.println("Kein Dispo bei Sparkonten erlaubt!");
+			System.out.printf("Kein Dispo bei Sparkonten erlaubt!\n");
     }
     
 	/**
@@ -210,7 +209,24 @@ public class Konto
    {
         return dispo;    
    }
-   
+    /**
+     * Set-Methode für die Transaktionsgebühr
+     * @param transGebühr wert übergeben
+     */
+    public void setTrans(double transGebühr)
+    {
+        this.transGebühr = transGebühr;
+    }
+
+	/**
+     * Get-Methode der Transaktionsgebühr
+     * @return rückgabe transGebühr
+     */
+    public double getTrans()
+    {
+		return transGebühr;
+	}
+		  
    /**
 	* Funktion zur Zinszahlung bei Sparkonten
 	* @return Rückgabe des neuen Kontostandes
@@ -238,8 +254,8 @@ public class Konto
    {
 	   return zinssatz/10000;
    }
-
-   /**
+	
+	 /**
 	* Erstellt einen Kontoauszug
 	* @param jahr Jahreszahl übergeben
 	* @param monat Monat übergeben
@@ -258,10 +274,11 @@ public class Konto
 		}
 		else
 		{
-		    calendar.set(jahr, monat-1, tag);
+		    calendar.set(jahr, monat-1, tag+1);
 			for(Kontoauszug kontoauszug: kontoauszugListe)
 				if(kontoauszug.getTimeInMillis() <= calendar.getTimeInMillis())
 					System.out.printf("%s\t%.2f\t%s\n",kontoauszug.getArt(),kontoauszug.getBetrag(),kontoauszug.printDatum());
 		}
 	}
+
 }
