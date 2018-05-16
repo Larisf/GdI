@@ -17,6 +17,8 @@ public class Kalender {
 	{
 		this.calendar.set(jahr, monat-1, tag);
 	}
+
+	Kalender() {}
 	/**
 	 * Datum zurückgeben
 	 * @return calendar
@@ -36,5 +38,16 @@ public class Kalender {
 	public int getJahr()
 	{
 		return calendar.get(Calendar.YEAR);
+	}
+	public String printDatum()
+	{
+		if(getTag() <= 9 && getMonat() > 9)
+			return "0"+getTag()+"."+getMonat()+"."+getJahr();
+		else if(getMonat() <=9 && getTag() > 9)
+			return  getTag()+".0"+getMonat()+"."+getJahr();
+		else if(getMonat() <= 9 && getTag() <= 9)
+			return "0"+getTag()+".0"+getMonat()+"."+getJahr();
+		else
+			return getTag()+"."+getMonat()+"."+getJahr();
 	}
 }

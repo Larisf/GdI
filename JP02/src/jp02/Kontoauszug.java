@@ -24,7 +24,14 @@ public class Kontoauszug
 	}
 		public String printDatum()
 	{
-		return this.kalender.getTag()+"."+this.kalender.getMonat()+"."+this.kalender.getJahr();
+		if(this.kalender.getTag() <= 9 && this.kalender.getMonat() > 9)
+			return "0"+this.kalender.getTag()+"."+this.kalender.getMonat()+"."+this.kalender.getJahr();
+		else if(this.kalender.getMonat() <=9 && this.kalender.getTag() > 9)
+			return  this.kalender.getTag()+".0"+this.kalender.getMonat()+"."+this.kalender.getJahr();
+		else if(this.kalender.getMonat() <= 9 && this.kalender.getTag() <= 9)
+			return "0"+this.kalender.getTag()+".0"+this.kalender.getMonat()+"."+this.kalender.getJahr();
+		else
+			return this.kalender.getTag()+"."+this.kalender.getMonat()+"."+this.kalender.getJahr();
 	}
 	public long getTimeInMillis()
 	{

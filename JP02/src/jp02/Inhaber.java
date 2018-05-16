@@ -6,9 +6,9 @@ package jp02;
  */
 public class Inhaber
 {
-    private final String vorname;
-    private final String nachname;
-    private final String adresse;
+    private String vorname;
+    private String nachname;
+    private String adresse;
     /**
 	 * Konstruktor für Inhaber
 	 * @param vorname Vornamen setzen
@@ -21,6 +21,8 @@ public class Inhaber
         this.nachname = nachname.toUpperCase();
         this.adresse = adresse.toUpperCase();
     }
+
+	Inhaber() {}
 	/**
 	 * Rückgabe des Vornamens
 	 * @return vorname
