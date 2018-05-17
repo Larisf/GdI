@@ -23,8 +23,8 @@ public class Timer {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-					System.out.printf("Zeit abgelaufen, die Bombe ist explodiert!\n");
-					System.exit(0);
+						System.out.printf("Zeit abgelaufen, die Bombe ist explodiert!\n");
+						System.exit(0);
                 }
         }).start();
 	}

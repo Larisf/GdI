@@ -21,7 +21,8 @@ public class NoBomberMan {
 	private String bombe;
 	private String notiz;
 	private boolean beendet = false;
-	private static long start  = (System.currentTimeMillis()+(10*1000));
+	private static long sekunden = 60;
+	private static long start  = (System.currentTimeMillis()+(sekunden*1000));
 	/**
 	 * Konstruktor zum erstellen der Karte und des Parsers für die Eingabe
 	 */
@@ -118,8 +119,8 @@ public class NoBomberMan {
 	 */
 	private void willkommensTextAusgeben(){
 		System.out.printf("Willkommen bei DefinitelyNotBomberMan!\n"
-				+ "Du gehörst zu einem Bombenentschärfungsteam und musst die Bombe finden. Ihr habt dafür 60 Sekunden zeit andererseits werdet ihr alle sterben.\n"
-				+ aktuellerRaum.getBeschreibung());
+				+ "Du gehörst zu einem Bombenentschärfungsteam und musst die Bombe finden. Ihr habt dafür %d Sekunden zeit andererseits werdet ihr alle sterben.\n"
+				+ aktuellerRaum.getBeschreibung(),sekunden);
 	}
 	/**
 	 * Methode zur Überprüfung der Eingaben

@@ -30,6 +30,6 @@ public class Notiz {
 		if(notiz.equals(aktuellerRaum.getName()))
 			System.out.printf("Sie haben eine Notiz gefunden, auf ihr steht geschrieben:\"Um die Bombe zu entschärfen, müssen sie das Jahr der Heiligsprechung des Dominikus wissen!\"\n");
 		else
-			System.out.printf("Nichts außer Staub.\n%s\n%s",notiz,aktuellerRaum.getName());
+			System.out.printf("Nichts außer Staub.\n");
 	}
 }
