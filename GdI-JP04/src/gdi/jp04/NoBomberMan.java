@@ -26,7 +26,7 @@ public class NoBomberMan {
 	private String tSpawn;
 	private boolean beendet = false;
 	private static long sekunden = 300;
-	private static long start  = (System.currentTimeMillis()+(sekunden*1000));
+	private static long start  = (sekunden*1000);
 	/**
 	 * Konstruktor zum erstellen der Karte und des Parsers für die Eingabe
 	 */

@@ -24,7 +24,7 @@ public class Timer
 			{
 				try 
 				{
-					Thread.sleep(start-System.currentTimeMillis());
+					Thread.sleep(start);
                 } 
 				catch (InterruptedException e) 
 				{
