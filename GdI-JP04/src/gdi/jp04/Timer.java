@@ -18,22 +18,18 @@ public class Timer
 	 */
 	public void countDown(long start)
 	{
-		t1 = new Thread(new Runnable()
-		{
-			public void run() 
+		t1 = new Thread(() -> {
+			try 
 			{
-				try 
-				{
-					Thread.sleep(start);
-                } 
-				catch (InterruptedException e) 
-				{
-					System.exit(0);
-                }
-				System.out.printf("Zeit abgelaufen, die Bombe ist explodiert!\n");
+				Thread.sleep(start-System.currentTimeMillis());
+			}
+			catch (InterruptedException e)
+			{
 				System.exit(0);
-            }
-        });
+			}
+			System.out.printf("Zeit abgelaufen, die Bombe ist explodiert!\n");
+			System.exit(0);
+		});
 		t1.start();
 	}
 	public void stopTimer()

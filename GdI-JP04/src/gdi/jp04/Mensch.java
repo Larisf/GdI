@@ -14,7 +14,7 @@ abstract class Mensch
 {
 	protected static int leben = 100;
 	protected static int munitionPistole = 24;
-	protected static int munitionGewehr = 30;	
+	protected static int munitionGewehr = 10;	
 	public void getStatus(){}
 	public boolean pruefeTerrorist(){return false;}
 	public void getZustand(){}

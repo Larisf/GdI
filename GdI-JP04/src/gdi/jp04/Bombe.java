@@ -14,8 +14,8 @@ import java.util.Scanner;
  */
 class Bombe {
 
-	private String bombe;
-	private Raum aktuellerRaum;
+	private final String bombe;
+	private final Raum aktuellerRaum;
 	/**
 	 * Konstruktor zum erstellen der Bombe
 	 * @param bombe übergabe des Raumes in dem die Bombe liegt

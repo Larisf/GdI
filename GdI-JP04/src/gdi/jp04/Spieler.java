@@ -24,7 +24,7 @@ public class Spieler extends Mensch
 	@Override
 	public  void getStatus()
 	{
-		System.out.printf("Sie haben noch:\nLeben: %d\nMunition Pistole: %d\nMunition Gewehr: %d.\n"
+		System.out.printf("Sie haben noch:\nLeben: %d\nMunition Pistole: %d\nMunition Gewehr: %d.\n\n"
 								 ,lebenS,munP,munG);
 	}
 	@Override

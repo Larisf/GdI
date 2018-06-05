@@ -11,6 +11,8 @@ package gdi.jp04;
  */
 public class Map {
 	private int posi[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+	private final String[] orte = {"Wc","Garten","Saal","Büro","Erdgeschoss","Garage","Heizungsraum",
+							 "Keller","Weinkeller","Schlafzimmer","Balkon","1.Etage","Kinderzimmer"};
 	private int kellerID,eingangID,stockID;
 	private Raum aktuellerRaum;
 	/**
@@ -52,10 +54,13 @@ public class Map {
 	private void drawMap()
 	{
 		if(eingangID == 1)
-			System.out.printf("Erdgeschoss:\n====%d====%d\n====%d====%d\n====%d====%d\n", posi[0],posi[1],posi[2],posi[3],posi[4],posi[5]);
+			System.out.printf("Erdgeschoss:\n=================::%d::%s::=============::%d::%s::\n::%d::%s::===::%d::%s::===========::%d::%s::==\n::%d::%s::====::%d::%s::====::%d::%s::\n", 
+							  posi[0],orte[0],posi[1],orte[1],posi[11],orte[11],posi[2],orte[2],posi[3],orte[3],posi[7],orte[7],posi[4],orte[4],posi[5],orte[5]);
 		else if(kellerID == 1)
-			System.out.printf("Kellergeschoss:\n====%d====%d\n=========%d\n",posi[6],posi[7],posi[8]);
+			System.out.printf("Kellergeschoss:\n====::%d::%s::====::%d::%s::====::%d::%s::\n============================================::%d::%s::=\n",
+							  posi[6],orte[6],posi[7],orte[7],posi[4],orte[4],posi[8],orte[8]);
 		else if(stockID == 1)
-			System.out.printf("1.Stock\n=========%d\n====%d====%d\n=========%d\n", posi[9], posi[10], posi[11], posi[12]);
+			System.out.printf("1.Stock\n=============================::%d::%s::=========\n=========::%d::%s::=======::%d::%s::===::%d::%s::\n=============================::%d::%s::=========\n",
+						      posi[9],orte[9], posi[10],orte[10], posi[11],orte[11],posi[2],orte[2],posi[12],orte[12]);
 	}	
 }

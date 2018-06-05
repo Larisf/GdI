@@ -12,8 +12,8 @@ import java.util.Scanner;
  * @author Bambi
  */
 class Parser {
-	private Scanner reader;
-	private BefehlsSatz befehle;
+	private final Scanner reader;
+	private final BefehlsSatz befehle;
 	/**
 	 * Konstruktor zum erstellen des Parsers
 	 * @param start Systemzeit + 60Sekunden

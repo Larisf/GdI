@@ -11,7 +11,7 @@ package gdi.jp04;
  */
 class BefehlsSatz {
 	private static final String befehlsListe[] = {"go","status", "quit", "help", "zeit", "showMap", "sucheBombe", "liesNotiz"};	
-	private static final String beschreibungBefehle[] = {"gehe in Richtung",
+	private static final String beschreibungBefehle[] = {"gehe in Richtung: [north,east,west,south]",
 														 "zeige Leben und Munition",
 														 "beende das Spiel",
 														 "Hilfe aufrufen",

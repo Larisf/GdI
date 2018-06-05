@@ -11,8 +11,8 @@ package gdi.jp04;
  */
 public class Terrorist extends Mensch 
 {
-	private String terrorist;
-	private Raum aktuellerRaum;
+	private final String terrorist;
+	private final Raum aktuellerRaum;
 	private static int munP;
 	private static int munG;
 	private static int lebenT;
@@ -27,19 +27,17 @@ public class Terrorist extends Mensch
 	
 	/**
 	 * Methode zum überprüfen ob in dem Raum der Terrorist liegt
+	 * @return 
 	 */
 	@Override
 	public boolean pruefeTerrorist()
 	{
-		if(terrorist.equals(aktuellerRaum.getName()))
-			return true;
-		else
-			return false;
+		return terrorist.equals(aktuellerRaum.getName());
 	}
 	@Override
 	public void getZustand()
 	{
-		System.out.printf("Der Terrorist:\nLeben: %d\nMunition Pistole: %d\nMunition Gewehr: %d\n",lebenT,munP,munG);
+		System.out.printf("Der Terrorist:\nLeben: %d\nMunition Pistole: %d\nMunition Gewehr: %d\n\n",lebenT,munP,munG);
 	}
 	@Override
 	public void setLeben(int leben)

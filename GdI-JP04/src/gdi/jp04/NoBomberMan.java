@@ -14,19 +14,20 @@ import java.util.Random;
  */
 public class NoBomberMan {
 	private Raum aktuellerRaum;
-	private Parser parser;
-	private Map map = new Map();
+	private Raum eingang;
+	private final Parser parser;
+	private final Map map = new Map();
 	private Notiz notify;
 	private Bombe bomb;
 	private Mensch terrorist;
-	private Mensch spieler = new Spieler();
-	private Timer timer = new Timer();
+	private final Mensch spieler = new Spieler();
+	private final Timer timer = new Timer();
 	private String bombenOrt;
 	private String notizOrt;
 	private String tSpawn;
 	private boolean beendet = false;
-	private static long sekunden = 300;
-	private static long start  = (sekunden*1000);
+	private static final long SEKUNDEN = 300;
+	private static final long START  = (System.currentTimeMillis()+SEKUNDEN*1000);
 	/**
 	 * Konstruktor zum erstellen der Karte und des Parsers für die Eingabe
 	 */
@@ -51,7 +52,7 @@ public class NoBomberMan {
 		notizOrt = (orte[new Random().nextInt(orte.length)]);
 		tSpawn = (orte[new Random().nextInt(orte.length)]);
 		
-		Raum eingang = new Raum("Erdgeschoss");
+		eingang = new Raum("Erdgeschoss");
 		Raum keller = new Raum("Keller");
 		Raum heizungsraum = new Raum("Heizungsraum");
 		Raum garage = new Raum("Garage");
@@ -112,12 +113,12 @@ public class NoBomberMan {
 	{
 		willkommensTextAusgeben();
 		
-		timer.countDown(start);
+		timer.countDown(START);
 		beendet = false;
         while(!beendet) 
 		{
 			Befehl befehl = parser.getBefehl();
-			beendet = checkBefehl(befehl);;
+			beendet = checkBefehl(befehl);
         }
         System.out.println("Danke für dieses Spiel. Auf Wiedersehen.\n");		
 	}
@@ -129,7 +130,7 @@ public class NoBomberMan {
 				+ "Du gehörst zu einem Bombenentschärfungsteam und musst die Bombe finden. "
 				+ "Ihr habt dafür %d Sekunden zeit andererseits werdet ihr alle sterben."
 				+ "Beeilung! Die zeit läufts bereits!\n"
-				+ aktuellerRaum.getBeschreibung(),sekunden);
+				+ aktuellerRaum.getBeschreibung(),SEKUNDEN);
 	}
 	/**
 	 * Methode zur Überprüfung der Eingaben
@@ -145,22 +146,34 @@ public class NoBomberMan {
 			return false;
 		}
 		String erstesWort = befehl.getErstesWort();
-		if(erstesWort.equals("help"))
-			hilfeAusgeben();
-		else if(erstesWort.equals("go"))
-			wechsleRaum(befehl);
-		else if(erstesWort.equals("quit"))
-			exit  = exit(befehl);
-		else if(erstesWort.equals("showMap"))
-			showMap();
-		else if(erstesWort.equals("liesNotiz"))
-			liesNotiz();
-		else if(erstesWort.equals("sucheBombe"))
-			sucheBombe();
-		else if(erstesWort.equals("zeit"))
-			getTime();
-		else if(erstesWort.equals("status"))
-			spieler.getStatus();
+		switch (erstesWort) {
+			case "help":
+				hilfeAusgeben();
+				break;
+			case "go":
+				wechsleRaum(befehl);
+				break;
+			case "quit":
+				exit  = exit(befehl);
+				break;
+			case "showMap":
+				showMap();
+				break;
+			case "liesNotiz":
+				liesNotiz();
+				break;
+			case "sucheBombe":
+				sucheBombe();
+				break;
+			case "zeit":
+				getTime();
+				break;
+			case "status":
+				spieler.getStatus();
+				break;
+			default:
+				break;
+		}
 		return exit;
 	}
 	/**
@@ -217,7 +230,9 @@ public class NoBomberMan {
 	public void showMap()
 	{
 		map.createMap(aktuellerRaum);
-		System.out.printf("Bombe: %s\nNotiz: %s\nTerrorist: %s\n", bombenOrt,notizOrt,tSpawn);
+		if(aktuellerRaum != eingang && terrorist.getLeben() < 0)
+			System.out.printf("Bombe: %s\nCode: 1234\n",bombenOrt);
+		System.out.printf("T: %s\n",tSpawn);
 	}
 	/**
 	 * Methode zum lesen der Notiz
@@ -240,16 +255,16 @@ public class NoBomberMan {
 	 */
 	public void getTime()
 	{
-		 System.out.printf("Noch: %d Sekunden verbleibend.\n",(start - System.currentTimeMillis())/1000);
+		 System.out.printf("Noch: %d Sekunden verbleibend.\n",(START - System.currentTimeMillis())/1000);
 	}
 	public void encounter()
 	{
-			terrorist = new Terrorist(tSpawn,aktuellerRaum);
-			Kampf kampf = new Kampf(terrorist,spieler);
-			if(terrorist.pruefeTerrorist() == true)
-			{
-				System.out.printf("Sie haben einen Terroristen gefunden. Kaempfen Sie um Ihr leben!\n");
-				kampf.kampfSzenario();
-			}
+		terrorist = new Terrorist(tSpawn,aktuellerRaum);
+		Kampf kampf = new Kampf(terrorist,spieler);
+		if(terrorist.pruefeTerrorist() == true && terrorist.getLeben() > 0)
+		{
+			System.out.printf("Sie haben einen Terroristen gefunden. Kaempfen Sie um Ihr leben!\n\n");
+			kampf.kampfSzenario();
+		}
 	}
 }

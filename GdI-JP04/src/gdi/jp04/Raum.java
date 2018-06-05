@@ -15,8 +15,8 @@ import java.util.Set;
  */
 public class Raum {
 
-	private String beschreibung;
-	private HashMap ausgaenge;
+	private final String beschreibung;
+	private final HashMap ausgaenge;
 	/**
 	 * Konstruktor zum erstellen der Räume
 	 * @param beschreibung Übergabe der Kurzbeschreibung der Räume
