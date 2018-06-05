@@ -257,6 +257,10 @@ public class NoBomberMan {
 	{
 		 System.out.printf("Noch: %d Sekunden verbleibend.\n",(START - System.currentTimeMillis())/1000);
 	}
+
+	/**
+	 * Methode zum antreffen des Terroristen
+	 */
 	public void encounter()
 	{
 		terrorist = new Terrorist(tSpawn,aktuellerRaum);

@@ -21,38 +21,64 @@ public class Spieler extends Mensch
 		Spieler.munP = munitionPistole;
 		Spieler.munG = munitionGewehr;
 	}
+	/**
+	 * Methode zum zurückgeben des allgemeinen Zustands
+	 */
 	@Override
 	public  void getStatus()
 	{
 		System.out.printf("Sie haben noch:\nLeben: %d\nMunition Pistole: %d\nMunition Gewehr: %d.\n\n"
 								 ,lebenS,munP,munG);
 	}
+	/**
+	 * Methode zum abziehen von Lebenspunkten
+	 * @param leben leben abziehen
+	 */
 	@Override
 	public void setLeben(int leben)
 	{
 		lebenS -= leben;
 	}
+	/**
+	 * Methode zum abziehen von Pistolenmunition
+	 * @param munP munition abziehen
+	 */
 	@Override
 	public void setMunP(int munP)
 	{
 		Spieler.munP -= munP;
 	}
+	/**
+	 * Methode zum abziehen von Gewehrmunition
+	 * @param munG munition abziehen
+	 */
 	@Override
 	public void setMunG(int munG)
 	{
 		Spieler.munG -= munG;
 	}
-
+	/**
+	 * Methode zum abrufen der Lebenspunkte
+	 * @return leben zurückgenen
+	 */
 	@Override
 	public int getLeben()
 	{
 		return lebenS;
 	}
+	/**
+	 * Methode zum abrufen der Pistolenmunition
+	 * @return munition zurückgeben
+	 */
 	@Override
 	public int getMunP()
 	{
 		return munP;
 	}
+	/**
+	 * Methode zum abrufen der Gewehrmunition
+	 * @return munition zurückgeben
+	 */
 	@Override
 	public int getMunG()
 	{

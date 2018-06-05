@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- *
+ * Methode um ein Kampfszenario zu bearbeiten
  * @author Bambi
  */
 public class Kampf
@@ -21,11 +21,21 @@ public class Kampf
 	private boolean alive = true;
 	private boolean zugSpieler = true;
 	private boolean zugComputer = false;
+
+	/**
+	 * Konstruktor
+	 * @param terrorist Terroristen übergeben
+	 * @param spieler Spieler übergeben
+	 */
 	public Kampf(Mensch terrorist, Mensch spieler)
 	{
 		this.spieler = spieler;
 		this.terrorist = terrorist;
 	}
+
+	/**
+	 * Methode zum einleiten eines Kampfes
+	 */
 	public void kampfSzenario()
 	{
 		boolean flee = false;
@@ -41,6 +51,9 @@ public class Kampf
 				flee = true;
 		}
 	}
+	/**
+	 * Methode um den Zug des Spielers zu bearbeiten
+	 */
 	private void spielerZug()
 	{
 			System.out.printf("Waehlen sie eine Aktion!\n1.Pistole: %d/24 (10-20 Schaden)\t2.Gewehr: %d/10 (30-50 Schaden)\n3.Faust:    -/-\t\t\t\t4.Flucht\n\n"
@@ -124,6 +137,9 @@ public class Kampf
 			zugSpieler = false;
 		}
 	}
+	/**
+	 * Methode um den Zug des Computers zu bearbeiten
+	 */
 	private void terrorZug()
 	{
 		int rnd = new Random().nextInt(2);

@@ -7,7 +7,7 @@ package gdi.jp04;
 
 
 /**
- *
+ * Abstrakte Klasse Mensch für Spieler und Computer-Gegner
  * @author Bambi
  */
 abstract class Mensch 
