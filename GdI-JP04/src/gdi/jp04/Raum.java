@@ -32,7 +32,7 @@ public class Raum {
 	 */
 	public String getBeschreibung()
 	{
-		return "Sie befinden sich hier: "+beschreibung + "\nEs gibt folgende Möglichkeiten weiterzugehen: "+ getAusgaenge() +"\n";
+		return "Sie befinden sich hier: "+beschreibung + "\nEs gibt folgende Moeglichkeiten weiterzugehen: "+ getAusgaenge() +"\n";
 	}
 	/**
 	 * Methode zur Rückgabe der Ausgänge
