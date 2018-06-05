@@ -33,7 +33,7 @@ class Bombe {
 	{
 		if(bombe.equals(aktuellerRaum.getName()))
 		{
-			System.out.printf("Sie haben die Bombe gefunden, entschärfen Sie sie indem sie den richtigen Code eingeben!\n");
+			System.out.printf("Sie haben die Bombe gefunden, entschaerfen Sie sie indem sie den richtigen Code eingeben!\n");
 			entschaerfen();
 		}
 		else
@@ -48,7 +48,7 @@ class Bombe {
 		String eingabe = scan.next();
 		if(eingabe.equals("1234"))
 		{
-			System.out.printf("Sie haben die Bombe entschärft und somit gewonnen!\n");
+			System.out.printf("Sie haben die Bombe entschaerft und somit gewonnen!\n");
 			System.exit(0);
 		}
 		else

@@ -11,7 +11,7 @@ package gdi.jp04;
  */
 public class Map {
 	private int posi[] = {0,0,0,0,0,0,0,0,0,0,0,0,0};
-	private final String[] orte = {"Wc","Garten","Saal","Büro","Erdgeschoss","Garage","Heizungsraum",
+	private final String[] orte = {"Wc","Garten","Saal","Buero","Erdgeschoss","Garage","Heizungsraum",
 							 "Keller","Weinkeller","Schlafzimmer","Balkon","1.Etage","Kinderzimmer"};
 	private int kellerID,eingangID,stockID;
 	private Raum aktuellerRaum;
@@ -36,7 +36,7 @@ public class Map {
 			case "Wc" :				for(int i =0;i<=posi.length-1;i++)posi[i] = 0;posi[0] = 1;break;
 			case "Garten":			for(int i =0;i<=posi.length-1;i++)posi[i] = 0;posi[1] = 1;break;
 			case "Saal":			for(int i =0;i<=posi.length-1;i++)posi[i] = 0;posi[2] = 1;kellerID = 0;eingangID = 1;stockID = 0;break;
-			case "Büro":			for(int i =0;i<=posi.length-1;i++)posi[i] = 0;posi[3] = 1;break;
+			case "Buero":			for(int i =0;i<=posi.length-1;i++)posi[i] = 0;posi[3] = 1;break;
 			case "Erdgeschoss":		for(int i =0;i<=posi.length-1;i++)posi[i] = 0;posi[4] = 1;kellerID = 0;eingangID = 1;stockID = 0;break;
 			case "Garage":			for(int i =0;i<=posi.length-1;i++)posi[i] = 0;posi[5] = 1;break;
 			case "Heizungsraum":	for(int i =0;i<=posi.length-1;i++)posi[i] = 0;posi[6] = 1;break;

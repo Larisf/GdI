@@ -46,7 +46,7 @@ public class NoBomberMan {
 	 */
 	private void karteErzeugen()
 	{
-		String[] orte = {"Erdgeschoss","Keller","Heizungsraum","Garage","Büro","Saal","Weinkeller",
+		String[] orte = {"Erdgeschoss","Keller","Heizungsraum","Garage","Buero","Saal","Weinkeller",
 						 "Wc","1.Etage","Schlafzimmer","Kinderzimmer","Balkon","Garten"};
 		bombenOrt = (orte[new Random().nextInt(orte.length)]);
 		notizOrt = (orte[new Random().nextInt(orte.length)]);
@@ -56,7 +56,7 @@ public class NoBomberMan {
 		Raum keller = new Raum("Keller");
 		Raum heizungsraum = new Raum("Heizungsraum");
 		Raum garage = new Raum("Garage");
-		Raum buero = new Raum("Büro");
+		Raum buero = new Raum("Buero");
 		Raum saal = new Raum("Saal");
 		Raum weinkeller = new Raum("Weinkeller");
 		Raum wc = new Raum("Wc");
@@ -120,16 +120,16 @@ public class NoBomberMan {
 			Befehl befehl = parser.getBefehl();
 			beendet = checkBefehl(befehl);
         }
-        System.out.println("Danke für dieses Spiel. Auf Wiedersehen.\n");		
+        System.out.println("Danke fuer dieses Spiel. Auf Wiedersehen.\n");		
 	}
 	/**
 	 * Methode für die Willkommensnachricht
 	 */
 	private void willkommensTextAusgeben(){
 		System.out.printf("Willkommen bei DefinitelyNotBomberMan!\n"
-				+ "Du gehörst zu einem Bombenentschärfungsteam und musst die Bombe finden. "
-				+ "Ihr habt dafür %d Sekunden zeit andererseits werdet ihr alle sterben."
-				+ "Beeilung! Die zeit läufts bereits!\n"
+				+ "Du gehoerst zu einem Bombenentschaerfungsteam und musst die Bombe finden. "
+				+ "Ihr habt dafuer %d Sekunden zeit andererseits werdet ihr alle sterben."
+				+ "Beeilung! Die zeit laeufts bereits!\n"
 				+ aktuellerRaum.getBeschreibung(),SEKUNDEN);
 	}
 	/**
@@ -181,7 +181,7 @@ public class NoBomberMan {
 	 */
 	private void hilfeAusgeben()
 	{
-		System.out.printf("Sie müssen die Bombe finden und entschärfen!\n");
+		System.out.printf("Sie muessen die Bombe finden und entschaerfen!\n");
 		parser.befehleAusgeben();
 	}
 	/**
@@ -215,7 +215,7 @@ public class NoBomberMan {
 	{
 		if(befehl.hatZweitesWort())
 		{
-			System.out.printf("Willste raus? ein Wort genügt.\n");
+			System.out.printf("Willste raus? ein Wort genuegt.\n");
 			return false;
 		}
 		else
