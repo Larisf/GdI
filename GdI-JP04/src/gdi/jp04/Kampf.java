@@ -56,7 +56,7 @@ public class Kampf
 	 */
 	private void spielerZug()
 	{
-			System.out.printf("Waehlen sie eine Aktion!\n1.Pistole: %d/24 (10-20 Schaden)\t2.Gewehr: %d/10 (30-50 Schaden)\n3.Faust:    -/-\t\t\t\t4.Flucht\n\n"
+			System.out.printf("Waehlen sie eine Aktion!\n1.Pistole: %d/24 (10-20 Schaden)\t2.Gewehr: %d/10 (30-50 Schaden)\n3.Faust:    -/-  (0-5 Schaden)\t\t4.Flucht \t(Kann Fehlschlagen)\n\n"
 							  ,spieler.getMunP(),spieler.getMunG());
 			Scanner sc = new Scanner(System.in);
 			String eingabe = sc.next();
