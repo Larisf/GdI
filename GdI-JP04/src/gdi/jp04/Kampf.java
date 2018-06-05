@@ -131,14 +131,14 @@ public class Kampf
 			}
 		if(terrorist.getLeben() <= 0)
 		{
-			System.out.printf("Der Terrorist ist tod! Er trug einen Zettel bei sich, auf diesem steht der Code sowie der Aufenthaltsort der Bombe. "
-							+ "Rufe die Karte auf (showMap)für Informationen! Verlasse diesen Raum und kehre nicht wieder, hier wimmelt es gleich von seinen Kollegen.\n\n");
+			System.out.printf("Der Terrorist ist tod! Er trug einen Zettel bei sich, auf diesem steht der Code sowie der Aufenthaltsort der Bombe.\n"
+							+ "Rufe die Karte auf (showMap)für Informationen!\nVerlasse diesen Raum und kehre nicht wieder, hier wimmelt es gleich von seinen Kollegen.\n\n");
 			alive  = false;
 			zugSpieler = false;
 		}
 	}
 	/**
-	 * Methode um den Zug des Computers zu bearbeiten
+	 * Methode um den Zug des Computers als Terrorist zu bearbeiten
 	 */
 	private void terrorZug()
 	{
