@@ -13,7 +13,8 @@ import java.util.Scanner;
  * @author Bambi
  * NoBomberMan ein keines textbasiertes Spiel bei dem man eine Bombe suchen und entschärfen muss.
  */
-public class NoBomberMan {
+public class NoBomberMan 
+{
 	private Raum aktuellerRaum, eingang, keller, garten, schlafzimmer, kinderzimmer, balkon, saal, wc, ersteEtage, buero, heizungsraum, weinkeller, garage;
 	private final Parser parser;
 	private final Map map;
