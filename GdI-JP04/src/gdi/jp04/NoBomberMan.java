@@ -6,6 +6,7 @@
 package gdi.jp04;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -13,19 +14,20 @@ import java.util.Random;
  * NoBomberMan ein keines textbasiertes Spiel bei dem man eine Bombe suchen und entschärfen muss.
  */
 public class NoBomberMan {
-	private Raum aktuellerRaum, eingang;
+	private Raum aktuellerRaum, eingang, keller, garten, schlafzimmer, kinderzimmer, balkon, saal, wc, ersteEtage, buero, heizungsraum, weinkeller, garage;
 	private final Parser parser;
 	private final Map map;
 	private Notiz notify;
 	private Bombe bomb;
 	private final Tier papagei, hund;
 	private Mensch terrorist;
-	private final Platziere platziere = new Platziere();
+	private final Platziere platziere;
 	private final Mensch spieler;
 	private final Timer timer;
+	private boolean leicht;
 	private boolean beendet;
 	private static final long SEKUNDEN = 300;
-	private static final long START  = (System.currentTimeMillis()+SEKUNDEN*1000);
+	private static long START;
 	private boolean alive;
 	/**
 	 * Konstruktor zum erstellen der Karte und des Parsers für die Eingabe
@@ -37,6 +39,12 @@ public class NoBomberMan {
 		beendet = false;
 		timer = new Timer();
 		karteErzeugen();
+		platziere = new Platziere(eingang, keller, garten, schlafzimmer, kinderzimmer, balkon, saal, wc, ersteEtage, buero, heizungsraum, weinkeller, garage);
+		platziere.platzierePapagei();
+		platziere.platziereHund();
+		platziere.platziereBombe();
+		platziere.platziereNotiz();
+		platziere.platziereTerrorist();
 		parser = new Parser();
 		spieler = new Spieler();
 		terrorist = new Terrorist(platziere.getTSpawn());
@@ -53,24 +61,19 @@ public class NoBomberMan {
 	 */
 	private void karteErzeugen()
 	{	
-		platziere.platzierePapagei();
-		platziere.platziereHund();
-		platziere.platziereBombe();
-		platziere.platziereNotiz();
-		platziere.platziereTerrorist();
 		eingang = new Raum("Erdgeschoss");
-		Raum keller = new Raum("Keller");
-		Raum heizungsraum = new Raum("Heizungsraum");
-		Raum garage = new Raum("Garage");
-		Raum buero = new Raum("Buero");
-		Raum saal = new Raum("Saal");
-		Raum weinkeller = new Raum("Weinkeller");
-		Raum wc = new Raum("Wc");
-		Raum ersteEtage = new Raum("1.Etage");
-		Raum schlafzimmer = new Raum("Schlafzimmer");
-		Raum kinderzimmer = new Raum("Kinderzimmer");
-		Raum balkon = new Raum("Balkon");
-		Raum garten = new Raum("Garten");
+		keller = new Raum("Keller");
+		heizungsraum = new Raum("Heizungsraum");
+		garage = new Raum("Garage");
+		buero = new Raum("Buero");
+		saal = new Raum("Saal");
+		weinkeller = new Raum("Weinkeller");
+		wc = new Raum("Wc");
+		ersteEtage = new Raum("1.Etage");
+		schlafzimmer = new Raum("Schlafzimmer");
+		kinderzimmer = new Raum("Kinderzimmer");
+		balkon = new Raum("Balkon");
+		garten = new Raum("Garten");
 		
 		
 		eingang.setAusgang("north", saal);
@@ -118,8 +121,7 @@ public class NoBomberMan {
 	public void spielen()
 	{
 		willkommensTextAusgeben();
-		
-		timer.countDown(START);
+		schwierigKeitAussuchen();
 		beendet = false;
         while(!beendet) 
 		{
@@ -196,6 +198,8 @@ public class NoBomberMan {
 	 */
 	private void wechsleRaum(Befehl befehl)
 	{
+		START = (System.currentTimeMillis()+SEKUNDEN*1000);
+		timer.countDown(START);
 		if(!befehl.hatZweitesWort())
 		{
 			System.out.printf("Ich kann hier nicht lang!\n");
@@ -236,9 +240,10 @@ public class NoBomberMan {
 	public void showMap()
 	{
 		map.createMap(aktuellerRaum);
-		if(alive == false)
-			System.out.printf("Bombe: %s\nCode: 1234\n",platziere.getBombenOrt());
-		System.out.printf("T: %s P: %s H: %s\n",platziere.getTSpawn(),platziere.getPapagei(),platziere.getHund());
+		if(!alive)
+			System.out.printf("Bombe: %s\nCode: 1234\n",platziere.getBombenOrt().getName());
+		if(leicht)
+			System.out.printf("Terrorist: %s Papagei: %s Hund: %s\n",platziere.getTSpawn().getName(),platziere.getPapagei().getName(),platziere.getHund().getName());
 	}
 	/**
 	 * Methode zum lesen der Notiz
@@ -261,9 +266,11 @@ public class NoBomberMan {
 	 */
 	public void getTime()
 	{
-		 System.out.printf("Noch: %d Sekunden verbleibend.\n",(START - System.currentTimeMillis())/1000);
+		if(timer.getStatus())
+			System.out.printf("Noch: %d Sekunden verbleibend.\n",(START - System.currentTimeMillis())/1000);
+		else
+			System.out.printf("Timer startet nach der ersten Bewegung.\n");
 	}
-
 	/**
 	 * Methode zum antreffen des Terroristen
 	 */
@@ -273,27 +280,32 @@ public class NoBomberMan {
 		hund.setAktuellerRaum(aktuellerRaum);
 		terrorist.setAktuellerRaum(aktuellerRaum);
 		Kampf kampf = new Kampf(terrorist,spieler);
-		if(terrorist.pruefeTerrorist() == true && terrorist.getLeben() > 0)
+		if(terrorist.pruefeTerrorist() && terrorist.getLeben() > 0)
 		{
 			System.out.printf("Sie haben einen Terroristen gefunden. Kaempfen Sie um Ihr leben!\n\n");
 			kampf.kampfSzenario();
 		}
-		if(papagei.pruefeTier() == true)
+		if(papagei.pruefeTier())
 		{
-			System.out.printf("In diesem Raum befindet sich ein Papagei, er ruft immer wieder: %s. Vielleicht sollten wir einmal nachsehen was es dort zu finden gibt.\n",platziere.getNotizOrt());
+			System.out.printf("In diesem Raum befindet sich ein Papagei, er ruft immer wieder: %s. Vielleicht sollten wir einmal nachsehen was es dort zu finden gibt.\n",platziere.getNotizOrt().getName());
 		}
-		if(hund.pruefeTier() == true)
+		if(hund.pruefeTier())
 		{
-			int rnd = new Random().nextInt(2);
-			System.out.printf("In diesem Raum ist ein Hund! als Sie die Tür öffneten rennt er an Ihnen vorbei, als wenn er irgendwo hin wollte.\n Sie folgen ihm in einen anderen Raum!\n");
-			if(rnd == 0)
+			boolean rnd = new Random().nextBoolean();
+			System.out.printf("In diesem Raum ist ein Hund! als Sie die Tür öffneten rennt er an Ihnen vorbei, als wenn er irgendwo hin wollte.\nSie folgen ihm in einen anderen Raum!\n");
+			if(rnd)
 			{
-				System.out.printf("Der Hund führte Sie zu der Bombe!\n entschärfen Sie diese, indem Sie 'sucheBombe' eingeben!\n");
+				System.out.printf("Der Hund führte Sie zu der Bombe!\nEntschärfen Sie diese!\n");
+				aktuellerRaum = platziere.getBombenOrt();
+				platziere.setHund(platziere.getBombenOrt());
+				sucheBombe();
 			}
 			else
 			{
-				System.out.printf("Der Hund führt Sie in einen Raum in dem sich einer der Terroristen befindet!\n Er greift Ihn an, wird dabei aber erschossen!\n");
+				System.out.printf("Der Hund führt Sie in einen Raum in dem sich einer der Terroristen befindet!\nEr greift Ihn an. Als der Terrorist vor Schreck in die Decke schießt, rennt der Hund weg!\n");
 				terrorist.setLeben(50);
+				aktuellerRaum = platziere.getTSpawn();
+				platziere.setHund(platziere.getTSpawn());
 				kampf.kampfSzenario();
 			}
 		}
@@ -303,5 +315,15 @@ public class NoBomberMan {
 			platziere.platziereTerrorist();
 			terrorist = new Terrorist(platziere.getTSpawn());
 		}
+	}
+	/**
+	* Methode zum einstellen des Schwierigkeitsgrades
+	*/
+	private void schwierigKeitAussuchen() 
+	{
+		System.out.printf("Wählen sie einen Schwierigkeitsgrad aus:\n1 = leicht (Figuren werden bei 'showMap' angezeigt\n2 = schwer (Keine Hilfen in 'showMap'\n");
+		Scanner sc = new Scanner(System.in);
+		int auswahl = sc.nextInt();
+		leicht = auswahl == 1;
 	}
 }

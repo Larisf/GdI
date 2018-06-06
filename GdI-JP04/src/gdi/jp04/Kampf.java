@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Methode um ein Kampfszenario zu bearbeiten
  * @author Bambi
  */
-public class Kampf extends Mensch
+public class Kampf extends Mensch implements Waffen
 {
 	private final Mensch terrorist;
 	private final Mensch spieler;
@@ -35,8 +35,8 @@ public class Kampf extends Mensch
 		this.spieler = spieler;
 		this.terrorist = terrorist;
 		this.maxLeben = leben;
-		this.maxMunG = munitionPistole;
-		this.maxMunP = munitionGewehr;
+		this.maxMunG = MUNITION_PISTOLE;
+		this.maxMunP = MUNITION_GEWEHR;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class Kampf extends Mensch
 					spieler.setMunP(1);
 					if(spieler.getMunP() > 0 && terrorist.getLeben() > 0)
 					{
-						terrorist.setLeben(new Random().nextInt(10)+pPuffer);
+						terrorist.setLeben(new Random().nextInt(DMG_P)+pPuffer);
 						System.out.printf("Der Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
 						zugSpieler = false;
 						zugComputer = true;
@@ -91,7 +91,7 @@ public class Kampf extends Mensch
 					spieler.setMunG(1);
 					if(spieler.getMunG() > 0 && terrorist.getLeben() > 0)
 					{
-						terrorist.setLeben(new Random().nextInt(30)+gPuffer);
+						terrorist.setLeben(new Random().nextInt(DMG_G)+gPuffer);
 						System.out.printf("Der Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
 						zugSpieler = false;
 						zugComputer = true;
@@ -108,7 +108,7 @@ public class Kampf extends Mensch
 				{
 					if(terrorist.getLeben() > 0)
 					{
-						terrorist.setLeben(new Random().nextInt(5));
+						terrorist.setLeben(new Random().nextInt(DMG_F));
 						System.out.printf("Der Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
 						zugSpieler = false;
 						zugComputer = true;
@@ -117,8 +117,8 @@ public class Kampf extends Mensch
 				}
 				case "4":
 				{
-					int rnd = new Random().nextInt(3);
-					if(rnd == 0)
+					boolean rnd = new Random().nextBoolean();
+					if(rnd)
 					{
 						System.out.printf("Sie sind geflohen!\n");
 						zugSpieler = false;
@@ -148,7 +148,7 @@ public class Kampf extends Mensch
 	 */
 	private void terrorZug()
 	{
-		int rnd = new Random().nextInt(2);
+		int rnd = new Random().nextInt(3);
 			switch(rnd)
 			{
 				case 0:
@@ -156,7 +156,7 @@ public class Kampf extends Mensch
 					terrorist.setMunP(1);
 					if(terrorist.getMunP() > 0 && spieler.getLeben() > 0)
 					{
-						spieler.setLeben(new Random().nextInt(10)+pPuffer);
+						spieler.setLeben(new Random().nextInt(DMG_P)+pPuffer);
 						System.out.printf("Sie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);
 						zugSpieler = true;
 						zugComputer = false;
@@ -174,7 +174,7 @@ public class Kampf extends Mensch
 					terrorist.setMunG(1);
 					if(terrorist.getMunG() > 0 && spieler.getLeben() > 0)
 					{
-						spieler.setLeben(new Random().nextInt(30)+gPuffer);
+						spieler.setLeben(new Random().nextInt(DMG_G)+gPuffer);
 						System.out.printf("Sie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);
 						zugSpieler = true;
 						zugComputer = false;
@@ -191,7 +191,7 @@ public class Kampf extends Mensch
 				{
 					if(spieler.getLeben() > 0)
 					{
-						spieler.setLeben(new Random().nextInt(5));
+						spieler.setLeben(new Random().nextInt(DMG_F));
 						System.out.printf("Sie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);					
 						zugSpieler = true;
 						zugComputer = false;

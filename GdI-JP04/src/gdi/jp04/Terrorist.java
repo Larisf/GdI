@@ -9,17 +9,17 @@ package gdi.jp04;
  *
  * @author Bambi
  */
-public class Terrorist extends Mensch 
+public class Terrorist extends Mensch implements Waffen
 {
-	private final String terrorist;
+	private final Raum terrorist;
 	private Raum aktuellerRaum;
 	private static int munP;
 	private static int munG;
 	private static int lebenT;
-	public Terrorist(String terrorist)
+	public Terrorist(Raum terrorist)
 	{
-		Terrorist.munP = munitionPistole;
-		Terrorist.munG = munitionGewehr;
+		Terrorist.munP = MUNITION_PISTOLE;
+		Terrorist.munG = MUNITION_GEWEHR;
 		Terrorist.lebenT = leben;
 		this.terrorist = terrorist;
 	}
@@ -31,7 +31,7 @@ public class Terrorist extends Mensch
 	@Override
 	public boolean pruefeTerrorist()
 	{
-		return terrorist.equals(aktuellerRaum.getName());
+		return terrorist == aktuellerRaum;
 	}
 
 	/**

@@ -13,9 +13,14 @@ import java.util.Random;
  */
 public class Platziere 
 {
-		private final String[] orte = {"Erdgeschoss","Keller","Heizungsraum","Garage","Buero","Saal","Weinkeller",
-						 "Wc","1.Etage","Schlafzimmer","Kinderzimmer","Balkon","Garten"};
-		private String bombenOrt,notizOrt,tSpawn,pSpawn,hSpawn;
+	private Raum[] orte;
+	private Raum bombenOrt,notizOrt,tSpawn,pSpawn,hSpawn;
+
+	Platziere(Raum eingang, Raum keller, Raum garten, Raum schlafzimmer, Raum kinderzimmer, Raum balkon, Raum saal, Raum wc, Raum ersteEtage, Raum buero, Raum heizungsraum, Raum weinkeller, Raum garage) {
+		orte = new Raum[]{eingang, keller, heizungsraum, garage, buero, saal, weinkeller, wc, 
+						  ersteEtage, schlafzimmer, kinderzimmer, balkon, garten};
+	 
+	}
 
 	/**
 	 * Methode zum platzieren der Bombe
@@ -59,7 +64,7 @@ public class Platziere
 	 * Methode zur Rückgabe der Bombe
 	 * @return zurückgeben des Bomben Ortes
 	 */
-	public String getBombenOrt()
+	public Raum getBombenOrt()
 	{
 		return bombenOrt;
 	}
@@ -68,7 +73,7 @@ public class Platziere
 	 * Methode zur Rückgabe der Notiz
 	 * @return zurückgeben des Notizen Ortes
 	 */
-	public String getNotizOrt()
+	public Raum getNotizOrt()
 	{
 		return notizOrt;
 	}
@@ -77,7 +82,7 @@ public class Platziere
 	 * Methode zur Rückgabe des Terroristen
 	 * @return zurückgeben des Standortes des Terroristen
 	 */
-	public String getTSpawn()
+	public Raum getTSpawn()
 	{
 		return tSpawn;
 	}
@@ -85,7 +90,7 @@ public class Platziere
 	 * Methode zur Rückgabe des Papagein
 	 * @return zurückgeben des Standortes des Papagein
 	 */
-	public String getPapagei()
+	public Raum getPapagei()
 	{
 		return pSpawn;
 	}
@@ -93,8 +98,12 @@ public class Platziere
 	 * Methode zur Rückgabe des Hundes
 	 * @return zurückgeben des Standortes des Hundes
 	 */
-	public String getHund()
+	public Raum getHund()
 	{
 		return hSpawn;
+	}
+
+	void setHund(Raum hSpawn) {
+		this.hSpawn = hSpawn;
 	}
 }

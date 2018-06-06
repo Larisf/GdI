@@ -9,8 +9,11 @@ package gdi.jp04;
  *
  * @author Bambi
  */
-public abstract class Tier
+public interface Waffen 
 {
-	public void setAktuellerRaum(Raum aktuellerRaum){}
-	public boolean pruefeTier(){return false;}	
+	public static int MUNITION_PISTOLE = 24;
+	public static int MUNITION_GEWEHR = 10;
+	public static int DMG_P = 11;
+	public static int DMG_G = 31;
+	public static int DMG_F = 6;	
 }

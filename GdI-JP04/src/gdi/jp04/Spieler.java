@@ -10,7 +10,7 @@ package gdi.jp04;
  *
  * @author Bambi
  */
-public class Spieler extends Mensch
+public class Spieler extends Mensch implements Waffen
 {	
 	private static int lebenS;
 	private static int munP;
@@ -18,8 +18,8 @@ public class Spieler extends Mensch
 	public Spieler()
 	{
 		Spieler.lebenS = leben;
-		Spieler.munP = munitionPistole;
-		Spieler.munG = munitionGewehr;
+		Spieler.munP = MUNITION_PISTOLE;
+		Spieler.munG = MUNITION_GEWEHR;
 	}
 	/**
 	 * Methode zum zurückgeben des allgemeinen Zustands

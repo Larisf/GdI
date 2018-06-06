@@ -6,13 +6,13 @@
 package gdi.jp04;
 
 /**
- *
+ * Klasse für den Papagei
  * @author Bambi
  */
 public class Papagei extends Tier{
-	private final String papagei;
+	private final Raum papagei;
 	private Raum aktuellerRaum;
-	Papagei(String papagei) 
+	Papagei(Raum papagei) 
 	{
 		this.papagei = papagei;
 	}
@@ -34,7 +34,7 @@ public class Papagei extends Tier{
 	@Override
 	public boolean pruefeTier() 
 	{
-		return papagei.equals(aktuellerRaum.getName());
+		return papagei == aktuellerRaum;
 	}
 	
 }

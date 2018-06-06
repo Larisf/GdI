@@ -12,6 +12,7 @@ package gdi.jp04;
 public class Timer 
 {
 	private Thread t1;
+	private boolean running = false;
 	/**
 	 * Methode zum starten eines neuen Threads in dem der Counterläuft
 	 * @param start startzeit übergeben
@@ -19,8 +20,9 @@ public class Timer
 	public void countDown(long start)
 	{
 		t1 = new Thread(() -> {
-			try 
+			try
 			{
+				running = true;
 				Thread.sleep(start-System.currentTimeMillis());
 			}
 			catch (InterruptedException e)
@@ -38,6 +40,11 @@ public class Timer
 	 */
 	public void stopTimer()
 	{
-		t1.interrupt();
+		if(running)
+			t1.interrupt();
+	}
+	public boolean getStatus()
+	{
+		return running;
 	}
 }

@@ -10,14 +10,14 @@ package gdi.jp04;
  * @author Bambi
  */
 public class Notiz {
-	private final String notiz;
+	private final Raum notiz;
 	private final Raum aktuellerRaum;
 	/**
 	 * Konstruktor zum erzeugen der Notiz
 	 * @param notiz übergabe des Raumes in dem die Notiz liegt
 	 * @param aktuellerRaum Übergabe des aktuellen Raumes
 	 */
-	Notiz(String notiz, Raum aktuellerRaum) 
+	Notiz(Raum notiz, Raum aktuellerRaum) 
 	{
 		this.notiz = notiz;
 		this.aktuellerRaum = aktuellerRaum;
@@ -27,7 +27,7 @@ public class Notiz {
 	 */
 	public void getNotiz()
 	{
-		if(notiz.equals(aktuellerRaum.getName()))
+		if(notiz == aktuellerRaum)
 			System.out.printf("Sie haben eine Notiz gefunden, auf ihr steht geschrieben:\"Um die Bombe zu entschärfen, müssen sie das Jahr der Heiligsprechung des Dominikus wissen!\"\n");
 		else
 			System.out.printf("Nichts außer Staub.\n");

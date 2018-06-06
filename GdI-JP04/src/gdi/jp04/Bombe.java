@@ -14,14 +14,14 @@ import java.util.Scanner;
  */
 class Bombe {
 
-	private final String bombe;
+	private final Raum bombe;
 	private final Raum aktuellerRaum;
 	/**
 	 * Konstruktor zum erstellen der Bombe
 	 * @param bombe übergabe des Raumes in dem die Bombe liegt
 	 * @param aktuellerRaum  übergabe des Aktuellen Raumes
 	 */
-	public Bombe(String bombe, Raum aktuellerRaum) 
+	public Bombe(Raum bombe, Raum aktuellerRaum) 
 	{
 		this.bombe = bombe;
 		this.aktuellerRaum = aktuellerRaum;
@@ -31,7 +31,7 @@ class Bombe {
 	 */
 	public void getBombe()
 	{
-		if(bombe.equals(aktuellerRaum.getBeschreibung()))
+		if(bombe == aktuellerRaum)
 		{
 			System.out.printf("Sie haben die Bombe gefunden, entschaerfen Sie sie indem sie den richtigen Code eingeben!\n");
 			entschaerfen();

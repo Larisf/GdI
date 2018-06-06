@@ -6,18 +6,16 @@
 package gdi.jp04;
 
 /**
- *
+ * Klasse für den Hund
  * @author Bambi
  */
 public class Hund extends Tier{
-	private final String hund;
+	private final Raum hund;
 	private Raum aktuellerRaum;
-	Hund(String hund) 
+	Hund(Raum hund) 
 	{		
 		this.hund = hund;
 	}
-
-
 	/**
 	 * Raum setzen für das Tier
 	 * @param aktuellerRaum Raum übergeben
@@ -36,7 +34,7 @@ public class Hund extends Tier{
 	@Override
 	public boolean pruefeTier() 
 	{
-		return hund.equals(aktuellerRaum.getName());
+		return hund == aktuellerRaum;
 	}
 	
 }
