@@ -241,9 +241,9 @@ public class NoBomberMan {
 	{
 		map.createMap(aktuellerRaum);
 		if(!alive)
-			System.out.printf("Bombe: %s\nCode: 1234\n",platziere.getBombenOrt().getName());
+			System.out.printf("Bombe:\t\t%s\nCode:\t\t1234\n",platziere.getBombenOrt().getName());
 		if(leicht)
-			System.out.printf("Terrorist: %s Papagei: %s Hund: %s\n",platziere.getTSpawn().getName(),platziere.getPapagei().getName(),platziere.getHund().getName());
+			System.out.printf("Terrorist:\t%s\nPapagei:\t%s\nHund:\t\t%s\n",platziere.getTSpawn().getName(),platziere.getPapagei().getName(),platziere.getHund().getName());
 	}
 	/**
 	 * Methode zum lesen der Notiz
