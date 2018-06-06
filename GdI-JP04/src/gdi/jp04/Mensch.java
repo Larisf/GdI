@@ -12,11 +12,12 @@ package gdi.jp04;
  */
 abstract class Mensch 
 {
-	protected static int leben = 100;
+	protected static int leben = 200;
 	protected static int munitionPistole = 24;
 	protected static int munitionGewehr = 10;	
 	public void getStatus(){}
 	public boolean pruefeTerrorist(){return false;}
+	public void setAktuellerRaum(Raum aktuellerRaum){}
 	public void getZustand(){}
 	public void setLeben(int leben){}
 	public void setMunP(int munP){}

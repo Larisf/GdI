@@ -57,7 +57,7 @@ public class Map {
 			System.out.printf("Erdgeschoss:\n=================::%d::%s::=============::%d::%s::\n::%d::%s::===::%d::%s::===========::%d::%s::==\n::%d::%s::====::%d::%s::====::%d::%s::\n", 
 							  posi[0],orte[0],posi[1],orte[1],posi[11],orte[11],posi[2],orte[2],posi[3],orte[3],posi[7],orte[7],posi[4],orte[4],posi[5],orte[5]);
 		else if(kellerID == 1)
-			System.out.printf("Kellergeschoss:\n====::%d::%s::====::%d::%s::====::%d::%s::\n============================================::%d::%s::=\n",
+			System.out.printf("Kellergeschoss:\n====::%d::%s::====::%d::%s::====::%d::%s::\n===========================::%d::%s::==================\n",
 							  posi[6],orte[6],posi[7],orte[7],posi[4],orte[4],posi[8],orte[8]);
 		else if(stockID == 1)
 			System.out.printf("1.Stock\n=============================::%d::%s::=========\n=========::%d::%s::=======::%d::%s::===::%d::%s::\n=============================::%d::%s::=========\n",

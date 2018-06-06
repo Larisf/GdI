@@ -10,8 +10,8 @@ package gdi.jp04;
  * @author Bambi
  */
 public class Notiz {
-	private String notiz;
-	private Raum aktuellerRaum;
+	private final String notiz;
+	private final Raum aktuellerRaum;
 	/**
 	 * Konstruktor zum erzeugen der Notiz
 	 * @param notiz übergabe des Raumes in dem die Notiz liegt

@@ -13,28 +13,35 @@ import java.util.Random;
  * NoBomberMan ein keines textbasiertes Spiel bei dem man eine Bombe suchen und entschärfen muss.
  */
 public class NoBomberMan {
-	private Raum aktuellerRaum;
-	private Raum eingang;
+	private Raum aktuellerRaum, eingang;
 	private final Parser parser;
-	private final Map map = new Map();
+	private final Map map;
 	private Notiz notify;
 	private Bombe bomb;
+	private final Tier papagei, hund;
 	private Mensch terrorist;
-	private final Mensch spieler = new Spieler();
-	private final Timer timer = new Timer();
-	private String bombenOrt;
-	private String notizOrt;
-	private String tSpawn;
-	private boolean beendet = false;
+	private final Platziere platziere = new Platziere();
+	private final Mensch spieler;
+	private final Timer timer;
+	private boolean beendet;
 	private static final long SEKUNDEN = 300;
 	private static final long START  = (System.currentTimeMillis()+SEKUNDEN*1000);
+	private boolean alive;
 	/**
 	 * Konstruktor zum erstellen der Karte und des Parsers für die Eingabe
 	 */
 	public NoBomberMan()
 	{
-			karteErzeugen();
-			parser = new Parser();
+		map = new Map();
+		alive = true;
+		beendet = false;
+		timer = new Timer();
+		karteErzeugen();
+		parser = new Parser();
+		spieler = new Spieler();
+		terrorist = new Terrorist(platziere.getTSpawn());
+		papagei = new Papagei(platziere.getPapagei());
+		hund = new Hund(platziere.getHund());
 	}
 	public static void main(String args[])
 	{
@@ -45,13 +52,12 @@ public class NoBomberMan {
 	 * Methode zum erstellen der Karte
 	 */
 	private void karteErzeugen()
-	{
-		String[] orte = {"Erdgeschoss","Keller","Heizungsraum","Garage","Buero","Saal","Weinkeller",
-						 "Wc","1.Etage","Schlafzimmer","Kinderzimmer","Balkon","Garten"};
-		bombenOrt = (orte[new Random().nextInt(orte.length)]);
-		notizOrt = (orte[new Random().nextInt(orte.length)]);
-		tSpawn = (orte[new Random().nextInt(orte.length)]);
-		
+	{	
+		platziere.platzierePapagei();
+		platziere.platziereHund();
+		platziere.platziereBombe();
+		platziere.platziereNotiz();
+		platziere.platziereTerrorist();
 		eingang = new Raum("Erdgeschoss");
 		Raum keller = new Raum("Keller");
 		Raum heizungsraum = new Raum("Heizungsraum");
@@ -230,16 +236,16 @@ public class NoBomberMan {
 	public void showMap()
 	{
 		map.createMap(aktuellerRaum);
-		if(aktuellerRaum != eingang && terrorist.getLeben() < 0)
-			System.out.printf("Bombe: %s\nCode: 1234\n",bombenOrt);
-		System.out.printf("T: %s\n",tSpawn);
+		if(alive == false)
+			System.out.printf("Bombe: %s\nCode: 1234\n",platziere.getBombenOrt());
+		System.out.printf("T: %s P: %s H: %s\n",platziere.getTSpawn(),platziere.getPapagei(),platziere.getHund());
 	}
 	/**
 	 * Methode zum lesen der Notiz
 	 */
 	public void liesNotiz()
 	{
-		notify = new Notiz(notizOrt, aktuellerRaum);
+		notify = new Notiz(platziere.getNotizOrt(), aktuellerRaum);
 		notify.getNotiz();
 	}
 	/**
@@ -247,7 +253,7 @@ public class NoBomberMan {
 	 */
 	public void sucheBombe()
 	{
-		bomb = new Bombe(bombenOrt, aktuellerRaum);
+		bomb = new Bombe(platziere.getBombenOrt(), aktuellerRaum);
 		bomb.getBombe();
 	}
 	/**
@@ -263,12 +269,39 @@ public class NoBomberMan {
 	 */
 	public void encounter()
 	{
-		terrorist = new Terrorist(tSpawn,aktuellerRaum);
+		papagei.setAktuellerRaum(aktuellerRaum);
+		hund.setAktuellerRaum(aktuellerRaum);
+		terrorist.setAktuellerRaum(aktuellerRaum);
 		Kampf kampf = new Kampf(terrorist,spieler);
 		if(terrorist.pruefeTerrorist() == true && terrorist.getLeben() > 0)
 		{
 			System.out.printf("Sie haben einen Terroristen gefunden. Kaempfen Sie um Ihr leben!\n\n");
 			kampf.kampfSzenario();
+		}
+		if(papagei.pruefeTier() == true)
+		{
+			System.out.printf("In diesem Raum befindet sich ein Papagei, er ruft immer wieder: %s. Vielleicht sollten wir einmal nachsehen was es dort zu finden gibt.\n",platziere.getNotizOrt());
+		}
+		if(hund.pruefeTier() == true)
+		{
+			int rnd = new Random().nextInt(2);
+			System.out.printf("In diesem Raum ist ein Hund! als Sie die Tür öffneten rennt er an Ihnen vorbei, als wenn er irgendwo hin wollte.\n Sie folgen ihm in einen anderen Raum!\n");
+			if(rnd == 0)
+			{
+				System.out.printf("Der Hund führte Sie zu der Bombe!\n entschärfen Sie diese, indem Sie 'sucheBombe' eingeben!\n");
+			}
+			else
+			{
+				System.out.printf("Der Hund führt Sie in einen Raum in dem sich einer der Terroristen befindet!\n Er greift Ihn an, wird dabei aber erschossen!\n");
+				terrorist.setLeben(50);
+				kampf.kampfSzenario();
+			}
+		}
+		if(terrorist.getLeben() <= 0 )
+		{
+			alive = false;
+			platziere.platziereTerrorist();
+			terrorist = new Terrorist(platziere.getTSpawn());
 		}
 	}
 }

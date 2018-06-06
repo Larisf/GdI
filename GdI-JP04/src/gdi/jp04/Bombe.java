@@ -31,7 +31,7 @@ class Bombe {
 	 */
 	public void getBombe()
 	{
-		if(bombe.equals(aktuellerRaum.getName()))
+		if(bombe.equals(aktuellerRaum.getBeschreibung()))
 		{
 			System.out.printf("Sie haben die Bombe gefunden, entschaerfen Sie sie indem sie den richtigen Code eingeben!\n");
 			entschaerfen();

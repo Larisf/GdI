@@ -9,6 +9,8 @@ package gdi.jp04;
  *
  * @author Bambi
  */
-public class Tier {
-	
+abstract class Tier
+{
+	public void setAktuellerRaum(Raum aktuellerRaum){}
+	public boolean pruefeTier(){return false;}	
 }

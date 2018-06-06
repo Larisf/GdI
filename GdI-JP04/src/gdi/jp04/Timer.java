@@ -32,6 +32,10 @@ public class Timer
 		});
 		t1.start();
 	}
+
+	/**
+	 * Methode zum unterbrechen des Timers.
+	 */
 	public void stopTimer()
 	{
 		t1.interrupt();

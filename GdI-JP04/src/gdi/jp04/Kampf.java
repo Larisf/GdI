@@ -12,12 +12,15 @@ import java.util.Scanner;
  * Methode um ein Kampfszenario zu bearbeiten
  * @author Bambi
  */
-public class Kampf
+public class Kampf extends Mensch
 {
-	Mensch terrorist;
-	Mensch spieler;
+	private final Mensch terrorist;
+	private final Mensch spieler;
 	private final int pPuffer = 10;
 	private final int gPuffer = 20;
+	private final int maxLeben;
+	private final int maxMunP;
+	private final int maxMunG;
 	private boolean alive = true;
 	private boolean zugSpieler = true;
 	private boolean zugComputer = false;
@@ -31,6 +34,9 @@ public class Kampf
 	{
 		this.spieler = spieler;
 		this.terrorist = terrorist;
+		this.maxLeben = leben;
+		this.maxMunG = munitionPistole;
+		this.maxMunP = munitionGewehr;
 	}
 
 	/**
@@ -56,8 +62,8 @@ public class Kampf
 	 */
 	private void spielerZug()
 	{
-			System.out.printf("Waehlen sie eine Aktion!\n1.Pistole: %d/24 (10-20 Schaden)\t2.Gewehr: %d/10 (30-50 Schaden)\n3.Faust:    -/-  (0-5 Schaden)\t\t4.Flucht \t(Kann Fehlschlagen)\n\n"
-							  ,spieler.getMunP(),spieler.getMunG());
+			System.out.printf("Waehlen sie eine Aktion!\n1.Pistole: %d/%d (10-20 Schaden)\t2.Gewehr: %d/%d (30-50 Schaden)\n3.Faust:    -/-  (0-5 Schaden)\t\t4.Flucht\t(Kann Fehlschlagen)\n\n"
+							  ,spieler.getMunP(),maxMunP,spieler.getMunG(),maxMunG);
 			Scanner sc = new Scanner(System.in);
 			String eingabe = sc.next();
 			switch(eingabe)
@@ -68,7 +74,7 @@ public class Kampf
 					if(spieler.getMunP() > 0 && terrorist.getLeben() > 0)
 					{
 						terrorist.setLeben(new Random().nextInt(10)+pPuffer);
-						System.out.printf("Der Terrorist hat noch %d/100 Leben.\n\n",terrorist.getLeben());
+						System.out.printf("Der Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
 						zugSpieler = false;
 						zugComputer = true;
 					}
@@ -86,7 +92,7 @@ public class Kampf
 					if(spieler.getMunG() > 0 && terrorist.getLeben() > 0)
 					{
 						terrorist.setLeben(new Random().nextInt(30)+gPuffer);
-						System.out.printf("Der Terrorist hat noch %d/100 Leben.\n\n",terrorist.getLeben());
+						System.out.printf("Der Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
 						zugSpieler = false;
 						zugComputer = true;
 					}
@@ -103,7 +109,7 @@ public class Kampf
 					if(terrorist.getLeben() > 0)
 					{
 						terrorist.setLeben(new Random().nextInt(5));
-						System.out.printf("Der Terrorist hat noch %d/100 Leben.\n\n",terrorist.getLeben());
+						System.out.printf("Der Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
 						zugSpieler = false;
 						zugComputer = true;
 					}
@@ -151,7 +157,7 @@ public class Kampf
 					if(terrorist.getMunP() > 0 && spieler.getLeben() > 0)
 					{
 						spieler.setLeben(new Random().nextInt(10)+pPuffer);
-						System.out.printf("Sie haben noch %d/100 Leben.\n\n",spieler.getLeben());
+						System.out.printf("Sie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);
 						zugSpieler = true;
 						zugComputer = false;
 					}
@@ -169,7 +175,7 @@ public class Kampf
 					if(terrorist.getMunG() > 0 && spieler.getLeben() > 0)
 					{
 						spieler.setLeben(new Random().nextInt(30)+gPuffer);
-						System.out.printf("Sie haben noch %d/100 Leben.\n\n",spieler.getLeben());
+						System.out.printf("Sie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);
 						zugSpieler = true;
 						zugComputer = false;
 					}
@@ -186,7 +192,7 @@ public class Kampf
 					if(spieler.getLeben() > 0)
 					{
 						spieler.setLeben(new Random().nextInt(5));
-						System.out.printf("Sie haben noch %d/100 Leben.\n\n",spieler.getLeben());					
+						System.out.printf("Sie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);					
 						zugSpieler = true;
 						zugComputer = false;
 					}

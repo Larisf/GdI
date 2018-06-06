@@ -12,17 +12,16 @@ package gdi.jp04;
 public class Terrorist extends Mensch 
 {
 	private final String terrorist;
-	private final Raum aktuellerRaum;
+	private Raum aktuellerRaum;
 	private static int munP;
 	private static int munG;
 	private static int lebenT;
-	public Terrorist(String terrorist, Raum aktuellerRaum)
+	public Terrorist(String terrorist)
 	{
 		Terrorist.munP = munitionPistole;
 		Terrorist.munG = munitionGewehr;
 		Terrorist.lebenT = leben;
 		this.terrorist = terrorist;
-		this.aktuellerRaum = aktuellerRaum;
 	}
 	
 	/**
@@ -102,5 +101,15 @@ public class Terrorist extends Mensch
 	public int getMunG()
 	{
 		return munG;
+	}
+
+	/**
+	 * Methode zum übergeben des aktuellen Raumes
+	 * @param aktuellerRaum aktuellenRaum übergeben
+	 */
+	@Override
+	public void setAktuellerRaum(Raum aktuellerRaum)
+	{
+		this.aktuellerRaum = aktuellerRaum;
 	}
 }
