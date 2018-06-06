@@ -25,9 +25,11 @@ class BefehlsSatz {
 	 */
 	public boolean getBefehlsWort(String eingabe)
     {
-        for(int i = 0; i < befehlsListe.length; i++)
-            if(befehlsListe[i].equals(eingabe))
-                return true;
+		for (String befehl : befehlsListe) {
+			if (befehl.equals(eingabe)) {
+				return true;
+			}
+		}
         return false;
     }
     /**

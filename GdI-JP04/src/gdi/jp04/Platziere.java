@@ -102,7 +102,9 @@ public class Platziere
 	{
 		return hSpawn;
 	}
-
+	/**
+	 *Methode zum setzen des Hundes (Manuell) 
+	 */
 	void setHund(Raum hSpawn) {
 		this.hSpawn = hSpawn;
 	}

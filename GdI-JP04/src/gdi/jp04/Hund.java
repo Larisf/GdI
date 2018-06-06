@@ -36,5 +36,4 @@ public class Hund extends Tier{
 	{
 		return hund == aktuellerRaum;
 	}
-	
 }

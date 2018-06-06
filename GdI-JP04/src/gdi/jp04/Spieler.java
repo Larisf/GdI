@@ -28,7 +28,7 @@ public class Spieler extends Mensch implements Waffen
 	public  void getStatus()
 	{
 		System.out.printf("Sie haben noch:\nLeben: %d\nMunition Pistole: %d\nMunition Gewehr: %d.\n\n"
-								 ,lebenS,munP,munG);
+						  ,lebenS,munP,munG);
 	}
 	/**
 	 * Methode zum abziehen von Lebenspunkten

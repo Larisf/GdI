@@ -46,7 +46,6 @@ class Parser {
 			return new Befehl(wort1, wort2);
 		else
 			return new Befehl(null,wort2);
-		
 	}
 	/**
 	 * Methode zur Ausgabe gültiger Befehle.
@@ -55,5 +54,4 @@ class Parser {
 	{
 		befehle.befehleAusgeben();
 	}
-	
 }

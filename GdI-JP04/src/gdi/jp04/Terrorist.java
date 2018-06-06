@@ -23,7 +23,6 @@ public class Terrorist extends Mensch implements Waffen
 		Terrorist.lebenT = leben;
 		this.terrorist = terrorist;
 	}
-	
 	/**
 	 * Methode zum überprüfen ob in dem Raum der Terrorist liegt
 	 * @return boolean ob der Terrorist dort ist oder nicht
@@ -33,7 +32,6 @@ public class Terrorist extends Mensch implements Waffen
 	{
 		return terrorist == aktuellerRaum;
 	}
-
 	/**
 	 * Methode zum zurückgeben des allgemeinen Zustands
 	 */
@@ -42,7 +40,6 @@ public class Terrorist extends Mensch implements Waffen
 	{
 		System.out.printf("Der Terrorist:\nLeben: %d\nMunition Pistole: %d\nMunition Gewehr: %d\n\n",lebenT,munP,munG);
 	}
-
 	/**
 	 * Methode zum abziehen von Lebenspunkten
 	 * @param leben leben abziehen
@@ -52,7 +49,6 @@ public class Terrorist extends Mensch implements Waffen
 	{
 		lebenT -= leben;
 	}
-
 	/**
 	 * Methode zum abziehen von Pistolenmunition
 	 * @param munP munition abziehen
@@ -62,7 +58,6 @@ public class Terrorist extends Mensch implements Waffen
 	{
 		Terrorist.munP -= munP;
 	}
-
 	/**
 	 * Methode zum abziehen von Gewehrmunition
 	 * @param munG munition abziehen
@@ -72,7 +67,6 @@ public class Terrorist extends Mensch implements Waffen
 	{
 		Terrorist.munG -= munG;
 	}
-
 	/**
 	 * Methode zum abrufen der Lebenspunkte
 	 * @return leben zurückgeben
@@ -82,7 +76,6 @@ public class Terrorist extends Mensch implements Waffen
 	{
 		return lebenT;
 	}
-
 	/**
 	 * Methode zum abrufen der Pistolenmunition
 	 * @return munition zurückgeben
@@ -92,7 +85,6 @@ public class Terrorist extends Mensch implements Waffen
 	{
 		return munP;
 	}
-
 	/**
 	 * Methode zum abrufen der Gewehrmunition
 	 * @return munition zurückgeben
@@ -102,7 +94,6 @@ public class Terrorist extends Mensch implements Waffen
 	{
 		return munG;
 	}
-
 	/**
 	 * Methode zum übergeben des aktuellen Raumes
 	 * @param aktuellerRaum aktuellenRaum übergeben

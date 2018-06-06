@@ -24,7 +24,6 @@ public class Kampf extends Mensch implements Waffen
 	private boolean alive = true;
 	private boolean zugSpieler = true;
 	private boolean zugComputer = false;
-
 	/**
 	 * Konstruktor
 	 * @param terrorist Terroristen übergeben
@@ -38,7 +37,6 @@ public class Kampf extends Mensch implements Waffen
 		this.maxMunG = MUNITION_PISTOLE;
 		this.maxMunP = MUNITION_GEWEHR;
 	}
-
 	/**
 	 * Methode zum einleiten eines Kampfes
 	 */

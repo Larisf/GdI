@@ -16,7 +16,6 @@ public class Papagei extends Tier{
 	{
 		this.papagei = papagei;
 	}
-
 	/**
 	 * Raum setzen für das Tier
 	 * @param aktuellerRaum Raum übergeben
@@ -26,7 +25,6 @@ public class Papagei extends Tier{
 	{
 		this.aktuellerRaum = aktuellerRaum;
 	}
-
 	/**
 	 * Raum zurückgeben in dem das Tier sitzt
 	 * @return Wahr oder Falsch
@@ -36,5 +34,4 @@ public class Papagei extends Tier{
 	{
 		return papagei == aktuellerRaum;
 	}
-	
 }

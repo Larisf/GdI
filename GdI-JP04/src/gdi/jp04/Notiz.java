@@ -27,7 +27,7 @@ public class Notiz {
 	 */
 	public void getNotiz()
 	{
-		if(notiz == aktuellerRaum)
+		if(aktuellerRaum == notiz)
 			System.out.printf("Sie haben eine Notiz gefunden, auf ihr steht geschrieben:\"Um die Bombe zu entschärfen, müssen sie das Jahr der Heiligsprechung des Dominikus wissen!\"\n");
 		else
 			System.out.printf("Nichts außer Staub.\n");

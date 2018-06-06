@@ -34,7 +34,6 @@ public class Timer
 		});
 		t1.start();
 	}
-
 	/**
 	 * Methode zum unterbrechen des Timers.
 	 */

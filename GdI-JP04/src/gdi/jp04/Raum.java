@@ -13,8 +13,8 @@ import java.util.Set;
  * Klasse zum erstellen der Räume
  * @author Bambi
  */
-public class Raum {
-
+public class Raum 
+{
 	private final String beschreibung;
 	private final HashMap ausgaenge;
 	/**
