@@ -34,8 +34,8 @@ public class Kampf extends Mensch implements Waffen
 		this.spieler = spieler;
 		this.terrorist = terrorist;
 		this.maxLeben = leben;
-		this.maxMunG = MUNITION_PISTOLE;
-		this.maxMunP = MUNITION_GEWEHR;
+		this.maxMunG = MUNITION_GEWEHR;
+		this.maxMunP = MUNITION_PISTOLE;
 	}
 	/**
 	 * Methode zum einleiten eines Kampfes
