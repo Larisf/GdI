@@ -209,7 +209,7 @@ public class NoBomberMan
 		String richtung = befehl.getZweitesWort();
 		Raum nxtRaum = aktuellerRaum.getAusgang(richtung);
 		if(nxtRaum == null)
-			System.out.printf("Schöne Wand!\n");
+			System.out.printf("Schoene Wand!\n");
 		else
 		{
 			aktuellerRaum = nxtRaum;
@@ -296,7 +296,7 @@ public class NoBomberMan
 			System.out.printf("In diesem Raum ist ein Hund! als Sie die Tür öffneten rennt er an Ihnen vorbei, als wenn er irgendwo hin wollte.\nSie folgen ihm in einen anderen Raum!\n");
 			if(rnd)
 			{
-				System.out.printf("Der Hund führte Sie zu der Bombe!\nEntschärfen Sie diese!\n");
+				System.out.printf("Der Hund fuehrte Sie zu der Bombe!\nEntschaerfen Sie diese!\n");
 				aktuellerRaum = platziere.getBombenOrt();
 				platziere.setHund(platziere.getBombenOrt());
 				sucheBombe();

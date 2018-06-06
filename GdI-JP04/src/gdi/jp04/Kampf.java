@@ -131,7 +131,7 @@ public class Kampf extends Mensch implements Waffen
 					break;
 				}
 				default :
-					System.out.printf("Gültige Eingabe tätigen!");
+					System.out.printf("Gueltige Eingabe taetigen!");
 			}
 		if(terrorist.getLeben() <= 0)
 		{
