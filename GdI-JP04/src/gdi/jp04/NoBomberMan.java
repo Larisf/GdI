@@ -27,9 +27,10 @@ public class NoBomberMan
 	private final Timer timer;
 	private boolean leicht;
 	private boolean beendet;
-	private static final long SEKUNDEN = 300;
+	private static final long SEKUNDEN = 10;
 	private static long START;
 	private boolean alive;
+	private static boolean firstMove = true;
 	/**
 	 * Konstruktor zum erstellen der Karte und des Parsers für die Eingabe
 	 */
@@ -199,8 +200,12 @@ public class NoBomberMan
 	 */
 	private void wechsleRaum(Befehl befehl)
 	{
-		START = (System.currentTimeMillis()+SEKUNDEN*1000);
-		timer.countDown(START);
+		if(firstMove)
+		{
+			START = (System.currentTimeMillis()+SEKUNDEN*1000);
+			timer.countDown(START);
+			firstMove = false;
+		}
 		if(!befehl.hatZweitesWort())
 		{
 			System.out.printf("Ich kann hier nicht lang!\n");
