@@ -123,13 +123,13 @@ public class NoBomberMan
 	{
 		willkommensTextAusgeben();
 		schwierigKeitAussuchen();
-		beendet = false;
         while(!beendet) 
 		{
 			Befehl befehl = parser.getBefehl();
 			beendet = checkBefehl(befehl);
         }
-        System.out.println("Danke fuer dieses Spiel. Auf Wiedersehen.\n");		
+        System.out.println("Danke fuer dieses Spiel. Auf Wiedersehen.\n");	
+		timer.stopTimer();
 	}
 	/**
 	 * Methode für die Willkommensnachricht
@@ -231,7 +231,6 @@ public class NoBomberMan
 		}
 		else
 		{
-			timer.stopTimer();
 			return true;
 		}
 	}
