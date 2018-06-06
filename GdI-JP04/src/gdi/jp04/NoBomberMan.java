@@ -330,11 +330,13 @@ public class NoBomberMan
 			String auswahl = sc.next();
 			switch(auswahl)
 			{
-				case "1": 
+				case "1":
+					System.out.printf("Schwierigkeitsgrad: LEICHT\n");
 					leicht = true;
 					chosen = true;
 					break;
 				case "2":
+					System.out.printf("Schwierigkeitsgrad: SCHWER\n");
 					leicht = false;
 					chosen = true;
 					break;

@@ -136,7 +136,7 @@ public class Kampf extends Mensch implements Waffen
 		if(terrorist.getLeben() <= 0)
 		{
 			System.out.printf("Der Terrorist ist tod! Er trug einen Zettel bei sich, auf diesem steht der Code sowie der Aufenthaltsort der Bombe.\n"
-							+ "Rufe die Karte auf (showMap)für Informationen!\nVerlasse diesen Raum und kehre nicht wieder, hier wimmelt es gleich von seinen Kollegen.\n\n");
+							+ "Rufe die Karte auf 'showMap'fuer Informationen!\nVerlasse diesen Raum und kehre nicht wieder, hier wimmelt es gleich von seinen Kollegen.\n\n");
 			alive  = false;
 			zugSpieler = false;
 		}
