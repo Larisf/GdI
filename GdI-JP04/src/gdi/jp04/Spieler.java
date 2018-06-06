@@ -7,7 +7,7 @@ package gdi.jp04;
 
 
 /**
- *
+ * Klasse für Spieler
  * @author Bambi
  */
 public class Spieler extends Mensch implements Waffen

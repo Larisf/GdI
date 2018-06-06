@@ -6,7 +6,7 @@
 package gdi.jp04;
 
 /**
- *
+ * Klasse für Terroristen
  * @author Bambi
  */
 public class Terrorist extends Mensch implements Waffen

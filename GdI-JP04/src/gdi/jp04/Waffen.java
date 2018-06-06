@@ -6,7 +6,7 @@
 package gdi.jp04;
 
 /**
- *
+ * Interface für Eigenschaften der Waffen
  * @author Bambi
  */
 public interface Waffen 
