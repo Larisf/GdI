@@ -292,7 +292,7 @@ public class NoBomberMan
 		if(hund.pruefeTier())
 		{
 			boolean rnd = new Random().nextBoolean();
-			System.out.printf("In diesem Raum ist ein Hund! als Sie die Tür öffneten rennt er an Ihnen vorbei, als wenn er irgendwo hin wollte.\nSie folgen ihm in einen anderen Raum!\n");
+			System.out.printf("In diesem Raum ist ein Hund! als Sie die Tuer oeffneten rennt er an Ihnen vorbei, als wenn er irgendwo hin wollte.\nSie folgen ihm in einen anderen Raum!\n");
 			if(rnd)
 			{
 				System.out.printf("Der Hund fuehrte Sie zu der Bombe!\nEntschaerfen Sie diese!\n");
@@ -302,7 +302,7 @@ public class NoBomberMan
 			}
 			else
 			{
-				System.out.printf("Der Hund führt Sie in einen Raum in dem sich einer der Terroristen befindet!\nEr greift Ihn an. Als der Terrorist vor Schreck in die Decke schießt, rennt der Hund weg!\n");
+				System.out.printf("Der Hund fuehrt Sie in einen Raum in dem sich einer der Terroristen befindet!\nEr greift Ihn an. Als der Terrorist vor Schreck in die Decke schiesst, rennt der Hund weg!\n");
 				terrorist.setLeben(50);
 				aktuellerRaum = platziere.getTSpawn();
 				platziere.setHund(platziere.getTSpawn());
