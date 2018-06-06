@@ -9,7 +9,8 @@ package gdi.jp04;
  * Klasse für den Papagei
  * @author Bambi
  */
-public class Papagei extends Tier{
+public class Papagei extends Tier
+{
 	private final Raum papagei;
 	private Raum aktuellerRaum;
 	Papagei(Raum papagei) 

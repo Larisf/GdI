@@ -27,7 +27,7 @@ public class NoBomberMan
 	private final Timer timer;
 	private boolean leicht;
 	private boolean beendet;
-	private static final long SEKUNDEN = 10;
+	private static final long SEKUNDEN = 300;
 	private static long START;
 	private boolean alive;
 	private static boolean firstMove = true;
@@ -242,7 +242,7 @@ public class NoBomberMan
 	/**
 	 * Methode zum aufrufen der Karte
 	 */
-	public void showMap()
+	private void showMap()
 	{
 		map.createMap(aktuellerRaum);
 		if(!alive)
@@ -253,7 +253,7 @@ public class NoBomberMan
 	/**
 	 * Methode zum lesen der Notiz
 	 */
-	public void liesNotiz()
+	private void liesNotiz()
 	{
 		notify = new Notiz(platziere.getNotizOrt(), aktuellerRaum);
 		notify.getNotiz();
@@ -261,7 +261,7 @@ public class NoBomberMan
 	/**
 	 * Methode zum überprüfen ob die Bombe sich in dem Raum befindet.
 	 */
-	public void sucheBombe()
+	private void sucheBombe()
 	{
 		bomb = new Bombe(platziere.getBombenOrt(), aktuellerRaum);
 		bomb.getBombe();
@@ -269,7 +269,7 @@ public class NoBomberMan
 	/**
 	 * Methode, die die Restzeit zurückgibt.
 	 */
-	public void getTime()
+	private void getTime()
 	{
 		if(timer.getStatus())
 			System.out.printf("Noch: %d Sekunden verbleibend.\n",(START - System.currentTimeMillis())/1000);
@@ -279,7 +279,7 @@ public class NoBomberMan
 	/**
 	 * Methode zum antreffen des Terroristen
 	 */
-	public void encounter()
+	private void encounter()
 	{
 		papagei.setAktuellerRaum(aktuellerRaum);
 		hund.setAktuellerRaum(aktuellerRaum);

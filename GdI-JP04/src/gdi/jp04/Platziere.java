@@ -105,7 +105,7 @@ public class Platziere
 	/**
 	 *Methode zum setzen des Hundes (Manuell) 
 	 */
-	void setHund(Raum hSpawn) {
+	public void setHund(Raum hSpawn) {
 		this.hSpawn = hSpawn;
 	}
 }

@@ -9,7 +9,8 @@ package gdi.jp04;
  * Klasse zum erstellen der Notiz
  * @author Bambi
  */
-public class Notiz {
+public class Notiz 
+{
 	private final Raum notiz;
 	private final Raum aktuellerRaum;
 	/**
