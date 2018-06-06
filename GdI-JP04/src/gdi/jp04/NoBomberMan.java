@@ -322,7 +322,7 @@ public class NoBomberMan
 	private void schwierigKeitAussuchen() 
 	{
 		boolean chosen = false;
-		System.out.printf("\nWählen sie einen Schwierigkeitsgrad aus:\n1 = leicht (Figuren werden bei 'showMap' angezeigt)\n2 = schwer (Keine Hilfen in 'showMap')\n");
+		System.out.printf("\nWaehlen sie einen Schwierigkeitsgrad aus:\n1 = leicht (Figuren werden bei 'showMap' angezeigt)\n2 = schwer (Keine Hilfen in 'showMap')\n");
 		while(!chosen)
 		{
 			Scanner sc = new Scanner(System.in);
