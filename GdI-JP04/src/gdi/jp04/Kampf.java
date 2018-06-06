@@ -72,7 +72,7 @@ public class Kampf extends Mensch implements Waffen
 					if(spieler.getMunP() > 0 && terrorist.getLeben() > 0)
 					{
 						terrorist.setLeben(new Random().nextInt(DMG_P)+pPuffer);
-						System.out.printf("Der Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
+						System.out.printf("Sie Schiessen mit der Pistole!\nDer Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
 						zugSpieler = false;
 						zugComputer = true;
 					}
@@ -90,7 +90,7 @@ public class Kampf extends Mensch implements Waffen
 					if(spieler.getMunG() > 0 && terrorist.getLeben() > 0)
 					{
 						terrorist.setLeben(new Random().nextInt(DMG_G)+gPuffer);
-						System.out.printf("Der Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
+						System.out.printf("Sie Schiessen mit dem Gewehr!\nDer Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
 						zugSpieler = false;
 						zugComputer = true;
 					}
@@ -107,7 +107,7 @@ public class Kampf extends Mensch implements Waffen
 					if(terrorist.getLeben() > 0)
 					{
 						terrorist.setLeben(new Random().nextInt(DMG_F));
-						System.out.printf("Der Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
+						System.out.printf("Sie schlagen mit den Faeusten zu.\nDer Terrorist hat noch %d/%d Leben.\n\n",terrorist.getLeben(),maxLeben);
 						zugSpieler = false;
 						zugComputer = true;
 					}
@@ -155,7 +155,7 @@ public class Kampf extends Mensch implements Waffen
 					if(terrorist.getMunP() > 0 && spieler.getLeben() > 0)
 					{
 						spieler.setLeben(new Random().nextInt(DMG_P)+pPuffer);
-						System.out.printf("Sie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);
+						System.out.printf("Der Terrorist schiesst mit der Pistole auf Sie.\nSie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);
 						zugSpieler = true;
 						zugComputer = false;
 					}
@@ -173,7 +173,7 @@ public class Kampf extends Mensch implements Waffen
 					if(terrorist.getMunG() > 0 && spieler.getLeben() > 0)
 					{
 						spieler.setLeben(new Random().nextInt(DMG_G)+gPuffer);
-						System.out.printf("Sie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);
+						System.out.printf("Der Terrorist schiesst mit dem Gewehr auf Sie.\nSie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);
 						zugSpieler = true;
 						zugComputer = false;
 					}
@@ -190,7 +190,7 @@ public class Kampf extends Mensch implements Waffen
 					if(spieler.getLeben() > 0)
 					{
 						spieler.setLeben(new Random().nextInt(DMG_F));
-						System.out.printf("Sie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);					
+						System.out.printf("Der Terrorist schlaegt Sie.\nSie haben noch %d/%d Leben.\n\n",spieler.getLeben(),maxLeben);					
 						zugSpieler = true;
 						zugComputer = false;
 					}
