@@ -137,8 +137,8 @@ public class NoBomberMan
 	 */
 	private void willkommensTextAusgeben(){
 		System.out.printf("Willkommen bei DefinitelyNotBomberMan!\n"
-				+ "Du gehoerst zu einem Bombenentschaerfungsteam und musst die Bombe finden.\n"
-				+ "Ihr habt dafuer %d Sekunden zeit andererseits werdet ihr alle sterben.\n"
+				+ "Sie gehoeren zu einem Bombenentschaerfungsteam und muessen die Bombe finden.\n"
+				+ "Sie haben dafuer %d Sekunden zeit andererseits werdet ihr alle sterben.\n"
 				+ aktuellerRaum.getBeschreibung(),SEKUNDEN);
 		showMap();
 	}
